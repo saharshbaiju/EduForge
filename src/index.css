@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@0,100..900;1,100..900&family=Trispace:wght@100..800&display=swap');
 
 
-/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ front-page\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\ front-page\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 .front-container{
     inset:0px;
@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    margin-bottom: 10vh;
+    margin-bottom: 20vh;
     
 }
 .caption{
@@ -26,9 +26,8 @@
 
 .search{
     border:none;
-    padding-top: 10px;
     width: 100%;
-    padding-left: 25px; 
+    padding-left: 25px;
     margin:10px 0px;
     color: white;
     background-color: black;
@@ -62,13 +61,15 @@
 }
 
 .wrapper-front{
-    width:clamp(400px,20vw,600px);
+    width:500px;
     position: relative;
     transition: width 0.2s linear;
 }
 .wrapper-front:hover{
-    width:clamp(400px,25vw,700px);
+    width:550px;
 }
+
+
 
 .search-button{
     height: 50px;
@@ -95,7 +96,7 @@
     font-family: "Trispace", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
-    font-size: clamp(7px,3vw,15px);
+    font-size: clamp(9px,2vw,15px);
     font-style: normal;
     color:white;
     border-radius:25px;
@@ -103,6 +104,7 @@
     justify-content: center;
     align-items: center;
     transition: background-image 0.2s ease-in-out,
+                font-weight 0.5s ease-in-out,
                 box-shadow 0.7s ease-in-out;
     
 }
@@ -119,10 +121,20 @@
 
 .login-signup:hover{
     z-index:0;
+    font-weight: 400;
     box-shadow: 50px 0 90px #008cff,-30px 0 100px #e100ff;
 }
 
+@media only screen and (max-width:420px) {
+    .wrapper-front{
+    width:330px;
+    position: relative;
+    transition: width 0.2s linear;
+    }
+    .wrapper-front:hover{
+        width:380px;
+    }
+    
+}
 
-
-/* |||||||||||||||||||||||||||||||||||||front-page end |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
-
+/* ||||||||||||||||||||||||||||front-page end |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */

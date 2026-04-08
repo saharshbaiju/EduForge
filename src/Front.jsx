@@ -20,6 +20,7 @@ function Front(){
         </div>
         <button className="login-signup">login/sign-up</button>
         <Background/>
+ 
         </>
     );
 

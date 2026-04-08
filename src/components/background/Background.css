@@ -18,13 +18,7 @@
     background:#124784;
     border-radius: 50%;
     position: relative;
-    
+    margin-bottom: 20vh;
     filter:blur(400px);
 }
 
-.circle3{
-    position:absolute;
-    top:-50px;
-    left: 300px;
-
-}
