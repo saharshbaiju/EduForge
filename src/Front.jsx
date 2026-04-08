@@ -18,6 +18,7 @@ function Front(){
             </div>
         </form>
         </div>
+        <button className="login-signup">login/sign-up</button>
         <Background/>
         </>
     );
