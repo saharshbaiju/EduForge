@@ -1,0 +1,29 @@
+.background {
+  position: fixed;
+  inset:0px;
+  background: #000000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: -1;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.blue {
+    height:600px;
+    width:600px;
+    background:#124784;
+    border-radius: 50%;
+    position: relative;
+    
+    filter:blur(400px);
+}
+
+.circle3{
+    position:absolute;
+    top:-50px;
+    left: 300px;
+
+}
