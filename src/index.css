@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@0,100..900;1,100..900&family=Trispace:wght@100..800&display=swap');
 
 
-/* \\\\\\\\\\\\\\\\\\\\\\\\\\\ front-page\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ front-page\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 .front-container{
     inset:0px;
@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    margin-bottom: 300px;
+    margin-bottom: 10vh;
     
 }
 .caption{
@@ -20,14 +20,15 @@
     font-optical-sizing: auto;
     font-weight: 200;
     
-    font-size: clamp(2px,2vw,20px);
+    font-size: clamp(14px,2vw,20px);
     font-style: normal;
 }
 
 .search{
     border:none;
+    padding-top: 10px;
     width: 100%;
-    padding-left: 25px;
+    padding-left: 25px; 
     margin:10px 0px;
     color: white;
     background-color: black;
@@ -61,13 +62,12 @@
 }
 
 .wrapper-front{
-    width:500px;
+    width:clamp(400px,20vw,600px);
     position: relative;
     transition: width 0.2s linear;
 }
 .wrapper-front:hover{
-
-    width:550px;
+    width:clamp(400px,25vw,700px);
 }
 
 .search-button{
@@ -95,7 +95,7 @@
     font-family: "Trispace", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
-    font-size: clamp(2px,2vw,15px);
+    font-size: clamp(7px,3vw,15px);
     font-style: normal;
     color:white;
     border-radius:25px;
@@ -123,4 +123,6 @@
 }
 
 
-/* ||||||||||||||||||||||||||||front-page end |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+
+/* |||||||||||||||||||||||||||||||||||||front-page end |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+
