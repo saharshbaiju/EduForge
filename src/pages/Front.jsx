@@ -1,5 +1,5 @@
 import React from "react";
-import Background from "./components/background/Background";
+import Background from "../components/background/Background";
 import { useState } from "react";
 
 function Front(){

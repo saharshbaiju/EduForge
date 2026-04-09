@@ -1,0 +1,85 @@
+
+.wrapper-top{
+    width:500px;
+    position: relative;
+    transition: width 0.2s linear;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.search-button{
+    height: 50px;
+    background: none;
+    border:none;
+    height: 100%;
+    aspect-ratio: 1;
+    position:absolute;
+    right:0;
+    margin-top:2px;
+}
+
+.top-panel{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.41);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.87rem;
+    transition: box-shadow 0.8s ease-in-out;
+    
+}
+.top-panel:hover{
+    box-shadow: 0 0 6px rgb(0, 110, 255);
+
+}
+
+.profile{
+    all:unset;
+    background-color: white;
+    align-items: center;
+    position:absolute;
+    height:50px;
+    width:50px;
+    border-radius: 50%;
+    outline: none;
+    position: absolute;
+    right:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
