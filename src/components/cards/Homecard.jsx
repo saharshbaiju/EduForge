@@ -2,9 +2,7 @@ import "./Homecard.css"
 
 function Homecard({data}){
 
-    function handleclick(data){
-        console.log(data)
-    }
+   
     return(
         <>
         <div className="card-wrapper">

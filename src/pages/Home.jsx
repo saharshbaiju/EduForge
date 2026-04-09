@@ -7,6 +7,7 @@ import Homecard from "../components/cards/Homecard";
 
 
 function Home(){
+    console.log(import.meta.env.VITE_YOUTUBE_API_KEY)
     const [data,setdata] = useState([]);
     return( 
         <>
