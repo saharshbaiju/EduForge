@@ -2,14 +2,17 @@ import React from "react";
 import Background from "../components/background/Background";
 import { useState } from "react";
 import Top_panel from "../components/top-panel/Top_panel";
+import HomeCard from "../components/cards/Homecard";
+
 
 function Home(){
-
-    return(
+    const [data,setdata] = useState([]);
+    return( 
         <>
         
-        <Top_panel/>
-        <Background/>
+        <Top_panel data={data} setdata={setdata}/>
+        <Background />
+        <Homecard/>
         </>
     );
 
