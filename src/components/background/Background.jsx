@@ -4,7 +4,7 @@ export default function Background(){
 
     return(
         <div className="background">
-            <div className="blue"></div>
+            {/* <div className="blue"></div> */}
         </div>
         
     );

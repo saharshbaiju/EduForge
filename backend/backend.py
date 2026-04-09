@@ -5,12 +5,12 @@ import requests
 url = "https://www.googleapis.com/youtube/v3/search"
 params = {
     "part": "snippet",
-    "q": "react",
+    "q": "machine learning",
     "type": "video",
     "maxResults": 5,
-    "key": "AIzaSyCCRU7MzJx85y_QID0fXAUwqaRaUO4hBtU"
+    "key":
 }
-
+    # "key": "AIzaSyCCRU7MzJx85y_QID0fXAUwqaRaUO4hBtU"
 res = requests.get(url, params=params)
 print(res.json())
 
