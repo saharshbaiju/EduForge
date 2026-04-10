@@ -24,7 +24,7 @@ export default function Top_panel({ data, setdata }){
                 maxResults: 40,
                 key: import.meta.env.VITE_YOUTUBE_API_KEY
                 });
-            
+        
             try {
                 const res = await fetch(`${url}?${params}`);
                 const data = await res.json();

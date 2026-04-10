@@ -2,12 +2,14 @@
 
 import Front from "./pages/Front";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <>
-    <Home/>
-    {/* <Front/> */}
+    {/* <Home/> */}
+
+    <Login/>
     </>
   )
 }
