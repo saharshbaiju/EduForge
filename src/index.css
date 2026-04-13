@@ -186,9 +186,6 @@ body {
 .dynamic-scroll-container {
   height: 100%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative; /* required for pseudo-elements */
 }
 
@@ -278,8 +275,62 @@ body {
 .login-container button{
     /* margin: 5px; */
     margin-top: 40px;
-    height: 50plo   x;
+    height: 50px ;
     font-size: 17px;
     border-radius:35px;
     
+}
+@media only screen and (max-width: 765px) {
+
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .dynamic-scroll-container {
+    align-items: flex-start;
+
+  }
+
+  .scroll-content {
+    flex-direction: row;
+    gap: 205px;
+    animation: scrollSide 10s linear infinite;
+  
+    
+  }
+  .login-container{
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:14px;
+    background-color: rgba(10, 7, 20, 0.102);
+    height:500px;
+    transition: box-shadow 0.8s ease-in-out;
+    width: 430px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .login-container:hover{
+    box-shadow: 0 0 6px rgb(131, 130, 130);
+
+}
+  .scroll-content img {
+    width: 200px;
+    transform: rotate(90deg);
+    margin: 0;
+    transform-origin: top left;
+  }
+
+  @keyframes scrollSide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+
 }
