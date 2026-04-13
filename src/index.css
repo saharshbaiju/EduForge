@@ -186,6 +186,138 @@ body {
 .dynamic-scroll-container {
   height: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* required for pseudo-elements */
+}
+
+
+.scroll-content {
+  display: flex;
+  flex-direction: column;
+  animation: scrollUp 10s linear infinite;
+}
+
+.scroll-content img {
+  margin-left: 10vw;
+  width: 420px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.login-container {
+    overflow: hidden;
+    position: relative;
+    border-radius:14px;
+    background-color: rgba(10, 7, 20, 0.102);
+    height:500px;
+    transition: box-shadow 0.8s ease-in-out;
+    width: 430px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.login-container h1{
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.login-container a{
+    all: unset;
+    text-decoration: underline;
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.login-container p{
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.login-container:hover{
+    box-shadow: 0 0 6px rgb(131, 130, 130);
+
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+
+.login-container label{
+    color:white;
+    font-family:urbanist;
+    margin:10px 0px 10px 0px;
+    font-size: 18px;
+}
+.login-container input{
+    all:unset;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    padding-left:2px;
+    font-family: urbanist;
+    height: 50px;
+    border-radius: 35px;
+    padding-left: 20px;
+    vertical-align: center;
+    font-size: 17px;
+    border:1px solid rgba(255, 255, 255, 0.376) ;
+}
+
+.login-container button{
+    /* margin: 5px; */
+    margin-top: 40px;
+    height: 50plo   x;
+    font-size: 17px;
+    border-radius:35px;
+    
+}
+/* |||||||||||||||||||||||||||||||||||||||login-page||||||||||||||||||||||||||||||| */
+
+/* ||||||||||||||||||||||||||||||||||||signup-page|||||||||||||||||||||||||||||||\ */
+
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+    -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+
+.dynamic-scroll-container {
+  height: 100%;
+  overflow: hidden;
   position: relative; /* required for pseudo-elements */
 }
 
@@ -285,6 +417,67 @@ body {
   .login-wrapper {
     flex-direction: column;
   }
+.signup-wrapper {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+    -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+
+.signup-container {
+    overflow: hidden;
+    position: relative;
+    border-radius:14px;
+    background-color: rgba(10, 7, 20, 0.102);
+    height:fit-content;
+    transition: box-shadow 0.8s ease-in-out;
+    width: 430px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.signup-container h1{
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.signup-container a{
+    all: unset;
+    text-decoration: underline;
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.signup-container p{
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.signup-container:hover{
+    box-shadow: 0 0 6px rgb(131, 130, 130);
+
+}
+
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
 
   .dynamic-scroll-container {
     align-items: flex-start;
@@ -314,6 +507,38 @@ body {
   }
   .login-container:hover{
     box-shadow: 0 0 6px rgb(131, 130, 130);
+.signup-container label{
+    color:white;
+    font-family:urbanist;
+    margin:10px 0px 10px 0px;
+    font-size: 18px;
+}
+.signup-container input{
+    all:unset;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    padding-left:2px;
+    font-family: urbanist;
+    height: 50px;
+    border-radius: 35px;
+    padding-left: 20px;
+    vertical-align: center;
+    font-size: 17px;
+    border:1px solid rgba(255, 255, 255, 0.376) ;
+}
+
+.signup-container button{
+    /* margin: 5px; */
+    margin-top: 40px;
+    height: 50plo   x;
+    font-size: 17px;
+    border-radius:35px;
+    padding: 15px;
+    
+}
+.signup-container h1{
+    font-weight: 400;
+}
 
 }
   .scroll-content img {

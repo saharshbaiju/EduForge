@@ -3,6 +3,7 @@
 import Front from "./pages/Front";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
     {/* <Home/> */}
 
     <Login/>
+    <Signup/>;
+    {/* <Front/> */}
     </>
   )
 }
