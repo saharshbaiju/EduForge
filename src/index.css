@@ -281,24 +281,70 @@ body {
     height: 50plo   x;
     font-size: 17px;
     border-radius:35px;
+    height: 50px;
+
     
+}
+@media only screen and (max-width: 750px) {
+
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .dynamic-scroll-container {
+    height: 40vh; 
+    align-items: flex-start;
+  }
+
+  .scroll-content {
+    flex-direction: row;
+    gap:310px;
+    animation: scrollSide 10s linear infinite;
+  }
+
+  .scroll-content img {
+    width: 300px;
+    transform: rotate(90deg);
+    margin: 0;
+    position: relative;
+    transform-origin: top left;
+  }
+
+  @keyframes scrollSide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .login-container {
+    width: 400px;
+    height: auto;
+    margin: 20px auto;
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
 }
 /* |||||||||||||||||||||||||||||||||||||||login-page||||||||||||||||||||||||||||||| */
 
 /* ||||||||||||||||||||||||||||||||||||signup-page|||||||||||||||||||||||||||||||\ */
-
 
 body {
   margin: 0;
   overflow: hidden;
 }
 
-.login-wrapper {
+.signup-wrapper{
   height: 100vh;
   display: flex;
   overflow: hidden;
 
-    -webkit-mask-image: linear-gradient(
+  -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0%,
     black 15%,
@@ -314,13 +360,11 @@ body {
   );
 }
 
-
 .dynamic-scroll-container {
   height: 100%;
   overflow: hidden;
-  position: relative; /* required for pseudo-elements */
+  position: relative;
 }
-
 
 .scroll-content {
   display: flex;
@@ -336,215 +380,88 @@ body {
 }
 
 @keyframes scrollUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
-.login-container {
-    overflow: hidden;
-    position: relative;
-    border-radius:14px;
-    background-color: rgba(10, 7, 20, 0.102);
-    height:500px;
-    transition: box-shadow 0.8s ease-in-out;
-    width: 430px;
-    margin: auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.login-container h1{
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.login-container a{
-    all: unset;
-    text-decoration: underline;
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.login-container p{
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.login-container:hover{
-    box-shadow: 0 0 6px rgb(131, 130, 130);
-
-}
-
-.login-form{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10%;
-}
-
-
-.login-container label{
-    color:white;
-    font-family:urbanist;
-    margin:10px 0px 10px 0px;
-    font-size: 18px;
-}
-.login-container input{
-    all:unset;
-    background-color: rgb(0, 0, 0);
-    color:white;
-    padding-left:2px;
-    font-family: urbanist;
-    height: 50px;
-    border-radius: 35px;
-    padding-left: 20px;
-    vertical-align: center;
-    font-size: 17px;
-    border:1px solid rgba(255, 255, 255, 0.376) ;
-}
-
-.login-container button{
-    /* margin: 5px; */
-    margin-top: 40px;
-    height: 50px ;
-    font-size: 17px;
-    border-radius:35px;
-    
-}
-@media only screen and (max-width: 765px) {
-
-  .login-wrapper {
-    flex-direction: column;
-  }
-.signup-wrapper {
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-
-    -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-}
-
 
 .signup-container {
-    overflow: hidden;
-    position: relative;
-    border-radius:14px;
-    background-color: rgba(10, 7, 20, 0.102);
-    height:fit-content;
-    transition: box-shadow 0.8s ease-in-out;
-    width: 430px;
-    margin: auto;
-    padding: 20px;
-    box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  border-radius:14px;
+  background-color: rgba(10, 7, 20, 0.102);
+  height:550px;
+  width: 430px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: box-shadow 0.8s ease-in-out;
 }
-.signup-container h1{
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.signup-container a{
-    all: unset;
-    text-decoration: underline;
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.signup-container p{
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
+
 .signup-container:hover{
-    box-shadow: 0 0 6px rgb(131, 130, 130);
-
+  box-shadow: 0 0 6px rgb(131, 130, 130);
 }
 
-.signup-form{
-    display: flex;
+.signup-container h1,
+.signup-container p,
+.signup-container a {
+  color: white;
+  font-family: Urbanist;
+  font-weight: 300;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.signup-container label {
+  color:white;
+  margin:10px 0;
+  font-size: 18px;
+  font-family: Urbanist;
+}
+
+.signup-container input {
+  all:unset;
+  background:black;
+  color:white;
+  height:50px;
+  border-radius:35px;
+  padding-left:20px;
+  font-size:17px;
+  border:1px solid rgba(255,255,255,0.3);
+}
+
+.signup-container button {
+  margin-top:40px;
+  height:50px;
+  border-radius:35px;
+  font-family: Urbanist;
+  font-size: 17px;
+}
+@media only screen and (max-width: 750px) {
+
+  .signup-wrapper {
     flex-direction: column;
-    margin-top: 10%;
-}
+  }
 
   .dynamic-scroll-container {
+    height: 40vh; 
     align-items: flex-start;
-
   }
 
   .scroll-content {
     flex-direction: row;
-    gap: 205px;
+    gap:310px;
     animation: scrollSide 10s linear infinite;
-  
-    
   }
-  .login-container{
-    overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius:14px;
-    background-color: rgba(10, 7, 20, 0.102);
-    height:500px;
-    transition: box-shadow 0.8s ease-in-out;
-    width: 430px;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  .login-container:hover{
-    box-shadow: 0 0 6px rgb(131, 130, 130);
-.signup-container label{
-    color:white;
-    font-family:urbanist;
-    margin:10px 0px 10px 0px;
-    font-size: 18px;
-}
-.signup-container input{
-    all:unset;
-    background-color: rgb(0, 0, 0);
-    color:white;
-    padding-left:2px;
-    font-family: urbanist;
-    height: 50px;
-    border-radius: 35px;
-    padding-left: 20px;
-    vertical-align: center;
-    font-size: 17px;
-    border:1px solid rgba(255, 255, 255, 0.376) ;
-}
 
-.signup-container button{
-    /* margin: 5px; */
-    margin-top: 40px;
-    height: 50plo   x;
-    font-size: 17px;
-    border-radius:35px;
-    padding: 15px;
-    
-}
-.signup-container h1{
-    font-weight: 400;
-}
-
-}
   .scroll-content img {
-    width: 200px;
+    width: 300px;
     transform: rotate(90deg);
     margin: 0;
+    position: relative;
     transform-origin: top left;
   }
 
@@ -557,5 +474,14 @@ body {
     }
   }
 
+  .signup-container {
+    width: 400px;
+    height: auto;
+    margin: 20px auto;
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
+  }
 }

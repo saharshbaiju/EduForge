@@ -10,7 +10,7 @@ function App() {
     <>
     {/* <Home/> */}
 
-    <Login/>
+    {/* <Login/> */}
     <Signup/>;
     {/* <Front/> */}
     </>
