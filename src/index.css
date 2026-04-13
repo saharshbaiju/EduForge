@@ -288,7 +288,135 @@ body {
 /* ||||||||||||||||||||||||||||||||||||signup-page|||||||||||||||||||||||||||||||\ */
 
 
+body {
+  margin: 0;
+  overflow: hidden;
+}
 
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+    -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+
+.dynamic-scroll-container {
+  height: 100%;
+  overflow: hidden;
+  position: relative; /* required for pseudo-elements */
+}
+
+
+.scroll-content {
+  display: flex;
+  flex-direction: column;
+  animation: scrollUp 10s linear infinite;
+}
+
+.scroll-content img {
+  margin-left: 10vw;
+  width: 420px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.login-container {
+    overflow: hidden;
+    position: relative;
+    border-radius:14px;
+    background-color: rgba(10, 7, 20, 0.102);
+    height:500px;
+    transition: box-shadow 0.8s ease-in-out;
+    width: 430px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.login-container h1{
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.login-container a{
+    all: unset;
+    text-decoration: underline;
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.login-container p{
+    color: white;
+    font-family: Urbanist;
+    font-weight: 300;
+}
+.login-container:hover{
+    box-shadow: 0 0 6px rgb(131, 130, 130);
+
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+
+.login-container label{
+    color:white;
+    font-family:urbanist;
+    margin:10px 0px 10px 0px;
+    font-size: 18px;
+}
+.login-container input{
+    all:unset;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    padding-left:2px;
+    font-family: urbanist;
+    height: 50px;
+    border-radius: 35px;
+    padding-left: 20px;
+    vertical-align: center;
+    font-size: 17px;
+    border:1px solid rgba(255, 255, 255, 0.376) ;
+}
+
+.login-container button{
+    /* margin: 5px; */
+    margin-top: 40px;
+    height: 50px ;
+    font-size: 17px;
+    border-radius:35px;
+    
+}
+@media only screen and (max-width: 765px) {
+
+  .login-wrapper {
+    flex-direction: column;
+  }
 .signup-wrapper {
   height: 100vh;
   display: flex;
@@ -351,7 +479,34 @@ body {
     margin-top: 10%;
 }
 
+  .dynamic-scroll-container {
+    align-items: flex-start;
 
+  }
+
+  .scroll-content {
+    flex-direction: row;
+    gap: 205px;
+    animation: scrollSide 10s linear infinite;
+  
+    
+  }
+  .login-container{
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:14px;
+    background-color: rgba(10, 7, 20, 0.102);
+    height:500px;
+    transition: box-shadow 0.8s ease-in-out;
+    width: 430px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .login-container:hover{
+    box-shadow: 0 0 6px rgb(131, 130, 130);
 .signup-container label{
     color:white;
     font-family:urbanist;
@@ -385,6 +540,22 @@ body {
     font-weight: 400;
 }
 
+}
+  .scroll-content img {
+    width: 200px;
+    transform: rotate(90deg);
+    margin: 0;
+    transform-origin: top left;
+  }
+
+  @keyframes scrollSide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
 
-
+}
