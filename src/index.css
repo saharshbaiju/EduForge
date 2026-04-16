@@ -196,7 +196,7 @@ body {
 .scroll-content {
   display: flex;
   flex-direction: column;
-  animation: scrollUp 10s linear infinite;
+  animation: scrollUp 20s linear infinite;
 }
 
 .scroll-content img {
@@ -211,7 +211,7 @@ body {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateY(-45%);
   }
 }
 .login-container {
@@ -299,7 +299,7 @@ body {
   .scroll-content {
     flex-direction: row;
     gap:310px;
-    animation: scrollSide 10s linear infinite;
+    animation: scrollSide 20s linear infinite;
   }
 
   .scroll-content img {
@@ -324,7 +324,7 @@ body {
     height: auto;
     margin: 20px auto;
     position: absolute;
-    top: 57%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -360,30 +360,6 @@ body {
   );
 }
 
-.dynamic-scroll-container {
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.scroll-content {
-  display: flex;
-  flex-direction: column;
-  animation: scrollUp 10s linear infinite;
-}
-
-.scroll-content img {
-  margin-left: 10vw;
-  width: 420px;
-  display: block;
-  margin-bottom: 10px;
-}
-
-@keyframes scrollUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-
 .signup-container {
   overflow: hidden;
   position: relative;
@@ -399,6 +375,9 @@ body {
 
 .signup-container:hover{
   box-shadow: 0 0 6px rgb(131, 130, 130);
+}
+.signup-container h1{
+  margin: 0;
 }
 
 .signup-container h1,
@@ -441,45 +420,15 @@ body {
   font-size: 17px;
 }
 @media only screen and (max-width: 750px) {
-
-  .signup-wrapper {
-    flex-direction: column;
+  .body{
+    overflow-y: scroll;
   }
-
-  .dynamic-scroll-container {
-    height: 40vh; 
-    align-items: flex-start;
-  }
-
-  .scroll-content {
-    flex-direction: row;
-    gap:310px;
-    animation: scrollSide 10s linear infinite;
-  }
-
-  .scroll-content img {
-    width: 300px;
-    transform: rotate(90deg);
-    margin: 0;
-    position: relative;
-    transform-origin: top left;
-  }
-
-  @keyframes scrollSide {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
   .signup-container {
     width: 400px;
-    height: auto;
+    height: 510px;
     margin: 20px auto;
     position: absolute;
-    top: 57%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 

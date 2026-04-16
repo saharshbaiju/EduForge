@@ -13,12 +13,15 @@ function Login(){
                 <div className="scroll-content">
                     <img src="src/assets/cover1.png" alt="scroll image" />
                     <img src="src/assets/cover2.png" alt="scroll image" />
+                    <img src="src/assets/cover2.png" alt="scroll image" />
 
 
                     {/* for infinite scroll */}
 
                     <img src="src/assets/cover1.png" alt="scroll image" />
                     <img src="src/assets/cover2.png" alt="scroll image" />
+                    <img src="src/assets/cover2.png" alt="scroll image" />
+
                 </div>
             </div>   
             <div className="login-container">
