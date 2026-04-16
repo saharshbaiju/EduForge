@@ -1,6 +1,7 @@
 import React from "react";
 import Background from "../components/background/Background";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Front(){
 
@@ -19,7 +20,7 @@ function Front(){
             </div>
         </form>
         </div>
-        <button className="login-signup">login/sign-up</button>
+        <Link to="/login"><button className="login-signup">login/sign-up</button></Link>
         <Background/>
  
         </>

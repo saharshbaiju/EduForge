@@ -1,8 +1,15 @@
 import React from "react";
 import Background from "../components/background/Background";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Signup(){
+    const navigate = useNavigate();
+
+    const handleSignUp = () =>{
+        navigate("/login")
+    }
+
     return(
         <>
         
@@ -24,7 +31,7 @@ function Signup(){
             </div>   
             <div className="signup-container">
                 <h1>Welcome</h1>
-                <p> Already have an account? <a href=""><b>Login here</b></a></p>
+                <p> Already have an account? <Link to='/login' ><b>Login here</b></Link></p>
                 <form className="signup-form">
                     <label for="username">Username</label>
                     <input type="text" id="username " placeholder="Enter username"/>
@@ -34,7 +41,7 @@ function Signup(){
                     
                     <label for="signup-confirm-pass">Confirm Password</label>
                     <input type="password" id="signup-confirm-pass" placeholder="Confirm Password"/>
-                    <button type="button">Sign up</button>
+                    <button type="button" onClick={handleSignUp}>Sign up</button>
                 </form>
                 
             </div>
