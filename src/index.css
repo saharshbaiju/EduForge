@@ -410,7 +410,15 @@ body {
   border-radius:35px;
   padding-left:20px;
   font-size:17px;
+  transition:border-color 0.6s ease-in-out;
   border:1px solid rgba(255,255,255,0.3);
+}
+
+.signup-container input.success {
+  border:solid 1.4px rgba(0, 235, 51, 0.69);
+}
+.signup-container input.error {
+  border:solid 1.4px rgba(254, 17, 0, 0.683);
 }
 
 .signup-container button {

@@ -6,13 +6,34 @@ import { useNavigate } from "react-router-dom";
 function Login(){
 
     const navigate = useNavigate();
-
-    const handleLogin = () =>{
-        navigate("/home")
-    }
-
     const [username,setusername] = useState("");
     const [password,setpassword] = useState("");
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        
+        const res = await fetch("http://127.0.0.1:5000/login",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({username,password}),
+        });
+        
+        const data = await res.json();
+        if (res.ok){
+            alert("login successful")
+            navigate("/home")
+        }else{
+            alert(data.error)
+        }
+            
+    };
+
+    // const handleLogin = () =>{
+    //     navigate("/home")
+    // }
+
+
+
 
 
 
@@ -44,7 +65,7 @@ function Login(){
                 <h1>Welcome.</h1>
                 <p><Link to='/signup'><b>Create a free account</b></Link> or log in to get started.</p>
                 <form className="login-form">
-                    <label for="username">Username</label>
+                    <label htmlFor="username">Username</label>
                     <input type="text"
                     id="username" 
                     placeholder="Enter username"
@@ -53,7 +74,7 @@ function Login(){
                     required
                     />
                     
-                    <label for="login-pass">Password</label>
+                    <label htmlFor="login-pass">Password</label>
                     <input type="password"
                     id="login-pass"
                     placeholder="Password"
@@ -62,13 +83,8 @@ function Login(){
                     required
                       />
 
-<<<<<<< Updated upstream
                     <button type="button" onClick={handleLogin}>Log In</button>
-=======
-                    <button type="button"
-                    
-                    >Log In</button>
->>>>>>> Stashed changes
+
                 </form>
                 
             </div>
