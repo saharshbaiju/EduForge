@@ -3,19 +3,23 @@ import Background from "../components/background/Background";
 import { useState } from "react";
 import Top_panel from "../components/top-panel/Top_panel";
 import Homecard from "../components/cards/Homecard";
+import Video from "../components/video/Video";
 
 
 
 function Home(){
-    console.log(import.meta.env.VITE_YOUTUBE_API_KEY)
     const [data,setdata] = useState([]);
+    const [isplaying,setisplaying] = useState(false);
+
     return( 
-        <>
+        <div className="home-container">
         
-        <Top_panel data={data} setdata={setdata}/>
+        <Top_panel data={data} setdata={setdata} setisplaying={setisplaying}/>
         <Background />
-        <Homecard data={data}/>
-        </>
+        
+        {isplaying=== false && <Homecard data={data} setisplaying={setisplaying}/>}
+        {isplaying === true && <Video/> }
+        </div>
     );
 
 }

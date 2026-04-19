@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@0,100..900;1,100..900&family=Trispace:wght@100..800&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\ front-page\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
-
+body{
+  padding: 10px;
+}
 .front-container{
     inset:0px;
     display:flex;
@@ -337,6 +339,7 @@ body {
 body {
   margin: 0;
   overflow: hidden;
+
 }
 
 .signup-wrapper{
@@ -444,3 +447,7 @@ body {
   }
 }
 
+/* ///////////////////////////////// home page ////////////////////////////////////////// */
+.home-container{
+  
+}

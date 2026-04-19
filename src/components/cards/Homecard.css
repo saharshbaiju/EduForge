@@ -6,16 +6,19 @@
     gap: 20px;
     padding: 20px;
     font-family: 'Urbanist', sans-serif;
+    overflow-y: auto;
+    height: 100vh;
+    scrollbar-width: none;
 }
 
 
 .card{
     display: flex;
+    height: max-content;
     flex-direction: column;
     background: rgb(0, 0, 0); 
     border: 3px solid rgba(255,255,255,0.1);
     border-radius: 12px;
-    overflow: hidden;
     transition: 0.3s ease-in-out;
     backdrop-filter: blur(14px);
 }
@@ -27,8 +30,9 @@
 
 .image-properties{
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: max-content;
+    border-radius: 12px;
+   
 }
 
 .card h2{

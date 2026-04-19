@@ -2,7 +2,7 @@ import "./Top_panel.css"
 import { useEffect, useState } from "react"
 
 
-export default function Top_panel({ data, setdata }){
+export default function Top_panel({ data, setdata, setisplaying }){
     const [input,setinput] = useState("");
     const [query,setquery] = useState("");
     
@@ -73,6 +73,7 @@ export default function Top_panel({ data, setdata }){
                         item.snippet.channelTitle.trim().toLowerCase() === ch.trim().toLowerCase()
                     )
                     );
+                setisplaying(false);
                 setdata(filtered);
                 
             } catch (err) {

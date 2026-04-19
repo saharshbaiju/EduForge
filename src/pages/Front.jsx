@@ -2,6 +2,7 @@ import React from "react";
 import Background from "../components/background/Background";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
 
 function Front(){
 
@@ -21,6 +22,7 @@ function Front(){
         </form>
         </div>
         <Link to="/login"><button className="login-signup">login/sign-up</button></Link>
+        <Hero/>
         <Background/>
  
         </>
