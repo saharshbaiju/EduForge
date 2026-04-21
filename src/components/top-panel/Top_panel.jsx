@@ -95,7 +95,7 @@ export default function Top_panel({ data, setdata, setisplaying }){
             onChange={(e) => setinput(e.target.value)}
             placeholder="Search skills ..."
             className="home-search" />
-           <button type="submit" className="sd search-button"><img src="src/assets/search.svg" alt="search" /></button>
+           <button type="submit" className="search-button"><img src="src/assets/search.svg" alt="search" /></button>
             </div>
         </form>
         <button className="profile"></button>

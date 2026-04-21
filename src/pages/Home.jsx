@@ -10,6 +10,7 @@ import Video from "../components/video/Video";
 function Home(){
     const [data,setdata] = useState([]);
     const [isplaying,setisplaying] = useState(false);
+    const [currentvideoId, setcurrentvideoId] = useState("");
 
     return( 
         <div className="home-container">
@@ -17,8 +18,8 @@ function Home(){
         <Top_panel data={data} setdata={setdata} setisplaying={setisplaying}/>
         <Background />
         
-        {isplaying=== false && <Homecard data={data} setisplaying={setisplaying}/>}
-        {isplaying === true && <Video/> }
+        {isplaying=== false && <Homecard data={data} setisplaying={setisplaying} setcurrentvideoId={setcurrentvideoId} />}
+        {isplaying === true && <Video videoId={currentvideoId}/> }
         </div>
     );
 

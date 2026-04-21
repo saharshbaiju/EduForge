@@ -2,10 +2,11 @@ import "./Homecard.css"
 import { useNavigate } from "react-router-dom";
 
 
-function Homecard({data ,setisplaying}){
+function Homecard({data , setisplaying , setcurrentvideoId}){
     const navigate = useNavigate();
     const selectVideo = (videoId) => {
         setisplaying(true);
+        setcurrentvideoId(videoId)
     };
    
     return(

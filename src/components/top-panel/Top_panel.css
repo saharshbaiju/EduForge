@@ -78,7 +78,14 @@
   margin: 0;
   padding: 0;
 }
-
+.wrapper-top{
+    width:480px;
+    position: relative;
+    transition: width 0.2s linear;
+    position: relative;
+    margin-right: 1rem;
+    margin-left: 20vw;
+}
 
 .top-panel{
     width: 100%;
@@ -139,6 +146,7 @@
     transform: translateY(-50%);
     height: 70%;
     aspect-ratio: 1;
+    top:17px;
 }
 
 
@@ -153,11 +161,12 @@
 }
 
 
-@media (max-width: 600px){
-    .top-panel{
-        padding: 8px;
+@media (max-width: 700px){
+    
+    .wrapper-top{
+        margin-left: 30px;
+        width:260px;
     }
-
     .home-search{
         font-size: 14px;
         height: 45px;
