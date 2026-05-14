@@ -13,7 +13,7 @@ export default function Custom_player({ videoId }) {
       playerRef.current = new window.YT.Player(containerRef.current, {
         videoId,
         playerVars: {
-          controls: 1d,          // default controls
+          controls: 1,          // default controls
           modestbranding:1 ,   // reduce YouTube logo
           rel: 0,              // no unrelated videos
         },

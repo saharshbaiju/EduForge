@@ -4,6 +4,7 @@ import mysql.connector
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
+from datetime import date
 
 app = Flask(__name__)
 
@@ -42,18 +43,20 @@ def signup():
     except mysql.connector.IntegrityError as e:
         print(e) 
         return jsonify({"error": "User already exists"}), 409
-    
+    finally:
+        cursor.close()
+        db.close()
 
 
 
-@app.route("/login",methods = ["POST","GET"])
+@app.route("/login",methods = ["POST"])
 def login():
     db = get_db()
     cursor = db.cursor(dictionary=True)
     loginData = request.json
     username = loginData.get("username")
     password = loginData.get("password")
-
+    
         
     try:
         cursor.execute("SELECT password_hash FROM users WHERE username = %s ",(username,))
@@ -61,160 +64,41 @@ def login():
         if user:
             stored_password = user['password_hash']
             if check_password_hash(stored_password,password):
-              return jsonify({"msg":"LOGIN SUCCESSFUL"}),200
+                today = date.today()
+                cursor.execute(
+                    "INSERT IGNORE INTO streak (username, login_date) VALUES (%s, %s)",
+                    (username, today)
+                )
+                db.commit()
+                return jsonify({"msg":"LOGIN SUCCESSFUL"}),200
             else:
               return jsonify({"error":"Invalid Password"}),401
         else:
             return jsonify({"error": "User doesn't exist"}), 404
-    except mysql.connector.IntegrityError as e:
-        return jsonify({"error":"User doesn't exist"}),401
+    except Exception as e:
+        return jsonify({"error":str(e)}),401
+    finally:
+        cursor.close()
+        db.close()
 
+@app.route("/streak/<username>", methods=["GET"])
+def get_streak(username):
+    db = get_db()
+    cursor = db.cursor()
 
+    cursor.execute(
+        "SELECT login_date FROM streak WHERE username = %s",
+        (username,)
+    )
+
+    dates = [str(row[0]) for row in cursor.fetchall()]
+
+    cursor.close()
+    db.close()
+
+    return jsonify({"dates": dates})
 
 
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

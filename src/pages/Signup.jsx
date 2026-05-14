@@ -16,18 +16,20 @@ function Signup(){
     const [username,setusername] = useState("");
     const [password,setpassword] = useState("");
     const [repassword,setrepassword] = useState("");
+    const [error, setError ] = useState("");
+
     async function handleSignUp(e) {
         e.preventDefault();
-        if (password !== repassword){
+        setError("");
 
-            alert("password do not match")
+        if (password !== repassword){
             return;
         }
         else{
             
         }
         
-        
+        try{
         const res = await fetch("http://127.0.0.1:5000/signup",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -36,12 +38,13 @@ function Signup(){
         
         const data = await res.json();
         if (res.ok){
-            alert("registered successfully")
-            navigate("/home")
+            navigate("/login", { state: { message: "Account created successfully!" } });
         }else{
-            alert(data.error)
+            setError(data.error)
         }
-        
+    }catch (err){
+        setError("Server connection failed!!!");
+    }
     };
 
     const isMatch = password === repassword;
@@ -74,8 +77,13 @@ function Signup(){
                     placeholder="Enter username"
                     value={username}
                     onChange={(e) => setusername(e.target.value)}
+                    className={error.includes("user") ? "input-error" : ""}
                     required
                     />
+                    {error.toLowerCase().includes("user") && (
+                        <span className="field-error">{error}</span>
+                    )}
+
                     
                     <label htmlFor="signup-pass">Password</label>
                     <input type="password" 
@@ -102,7 +110,15 @@ function Signup(){
                     value={repassword}
                     onChange={(e) => setrepassword(e.target.value)}
                     required
-                    />          
+                    /> .
+
+                    {error && 
+                    !error.toLowerCase().includes("user") && (
+                            <div className="error-container">
+                                <p className="error-text">{error}</p>
+                            </div>
+
+                    )}         
                     <button type="button" onClick={handleSignUp}>Sign up</button>
                 </form>
                 

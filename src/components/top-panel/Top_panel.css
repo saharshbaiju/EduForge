@@ -137,8 +137,8 @@
     display: none;
 }
 
-.search-button{
-    background: none;
+/* .search-button{
+    
     border: none;
     position: absolute;
     right: 10px;
@@ -147,7 +147,7 @@
     height: 70%;
     aspect-ratio: 1;
     top:17px;
-}
+} */
 
 
 .profile{
