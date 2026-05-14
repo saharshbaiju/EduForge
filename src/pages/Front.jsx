@@ -4,7 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
 import { useNavigate } from "react-router-dom";
 
-function Front({input, setinput}) {
+
+function Front({user,input, setinput}) {
+    console.log(user+"hello");
     const location = useLocation();
     const [showToast, setShowToast] = useState(false);
     const [toastMsg, setToastMsg] = useState("");
@@ -12,8 +14,13 @@ function Front({input, setinput}) {
 
     const handleSearch = (e) => {
         e.preventDefault();
+        if(!user){
+            navigate("/login")
+            return;
+        }
         if (input.trim()){
-            navigate(`/home?query=${encodeURIComponent(input)}`)
+            console.log("Redirecting to home...");
+            navigate(`/home?query=${encodeURIComponent(input.trim())}`)
         }
     };
     useEffect(() => {
@@ -23,11 +30,12 @@ function Front({input, setinput}) {
 
             const time = setTimeout(() => {
                 setShowToast(false);
-            }, 4000);
+            }, 1000);
 
             return () => clearTimeout(time); // 
         }
     }, [location]);
+
 
     return (
         <>
@@ -61,10 +69,25 @@ function Front({input, setinput}) {
                     </div>
                 </form>
             </div>
-
-            <Link to="/login">
+            {
+                !user && (
+                <>
+                <Link to="/login">
                 <button className="login-signup">login/sign-up</button>
-            </Link>
+                </Link>
+                </>
+                )
+            }
+            {
+                user && (
+                    <>
+                    <Link to="/profile">
+                    <img className="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4hXH0vSYIzlKSEVCV67X88kiAcYjH7S9FXQ&s" alt="profile image" />
+                    </Link>
+                    </>
+                )
+            }
+            
 
             <Hero />
             <Background />

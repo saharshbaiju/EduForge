@@ -39,7 +39,8 @@ function Login({ setuser, user }) {
     return (
         <>
             <Background />
-            <img className="logo" src="src/assets/forge.png" alt="logo" />
+            
+            <img onClick={() => navigate("/")} className="logo" src="src/assets/forge.png" alt="logo" />
 
             <div className="login-wrapper">
                 <div className="dynamic-scroll-container">

@@ -33,15 +33,22 @@ const allowedChannels =[
                     "IBM Research","Allen Institute for AI","Max Planck Society","Nature","Science Magazine","arXiv"
                     ];
 
-export default function Top_panel({ data, setdata, setisplaying }){
-    const [input,setinput] = useState("");
-    const [query,setquery] = useState("");
+export default function Top_panel({ data, setdata, setisplaying, initialQuery }){
+    const [input,setinput] = useState(initialQuery||"");
+    const [query,setquery] = useState(initialQuery||"");
 
     const navigate = useNavigate();
 
     const toProfile = () =>{
         navigate("/profile");
     }
+
+    useEffect(() => {
+        if (initialQuery) {
+            setinput(initialQuery);
+            setquery(initialQuery);
+        }
+    }, [initialQuery]);
     
     const handlesubmit = (e) => {
         e.preventDefault();

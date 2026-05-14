@@ -14,6 +14,8 @@ function App() {
   return localStorage.getItem("user") || "";
   });
 
+  const [input, setinput] = useState("");
+
 useEffect(() => {
   localStorage.setItem("user", user);
   }, [user]);
@@ -23,7 +25,7 @@ useEffect(() => {
     <Routes>
       <Route path="/login" element={<Login setuser={setuser} user={user}/>}/>
       <Route path="/signup" element={<Signup/>}/>
-      <Route path="/" element={<Front />}/>
+      <Route path="/" element={<Front user={user} input={input} setinput={setinput}/>}/>
       <Route path="/home" element={<Home user={user}/>}/>
       <Route path="/profile" element={<Profile user={user}/>}/>
     </Routes>

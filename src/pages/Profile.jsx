@@ -17,8 +17,10 @@ function Profile({ user }) {
               className="logo" 
               onClick={() => navigate("/home")}
             />
-
-            {/* ✅ Always load if user exists */}
+            <div className="profileContainer">
+                <img src="/src/assets/profile-1335-svgrepo-com.svg" alt="!!profile!!" id="icon_profile" />
+                <h2>RANK</h2>
+            </div>
             {user && <Heatmap username={user} />}
         </div>
     );

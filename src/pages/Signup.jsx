@@ -50,11 +50,12 @@ function Signup(){
     const isMatch = password === repassword;
     const isTypingConfirm = repassword.length > 0;
     return(
-        <>
-        
-        <Background/>
-                    <img className="logo" src="src/assets/forge.png" alt="logo" />
 
+        <>
+                    <img onClick={() => navigate("/")} className="logo" src="src/assets/forge.png" alt="logo" />
+
+        <Background/>
+        
         <div className="signup-wrapper">
             <div className="dynamic-scroll-container">
                 <div className="scroll-content">
