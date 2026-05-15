@@ -50,7 +50,7 @@ function Front({user,input, setinput}) {
             )}
 
             <div className="front-container">
-                <img src="src/assets/forge.png" alt="logo" className="logo" onClick={()=>navigate("/home")}/>
+                <img src="src/assets/forge.png" alt="logo" className="logo" />
                 <h1 className="eduforge-heading">EduForge</h1>
                 <h5 className="caption">Where knowledge is forged, not scrolled.</h5>
 
