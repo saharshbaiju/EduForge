@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 function Home({user}){
 const [data,setdata] = useState([]);
 const [isplaying,setisplaying] = useState(false);
-const [currentvideoId, setcurrentvideoId] = useState("");
+const [currentVideo, setcurrentVideo] = useState(null);
 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -23,8 +23,8 @@ return(
 <Top_panel data={data} setdata={setdata} setisplaying={setisplaying} initialQuery={urlQuery}/>
 <Background />
 
-{isplaying=== false && <Homecard data={data} setisplaying={setisplaying} setcurrentvideoId={setcurrentvideoId} />}
-{isplaying === true && <Video videoId={currentvideoId} /> }
+{isplaying=== false && <Homecard data={data} setisplaying={setisplaying} setcurrentVideo={setcurrentVideo} />}
+{isplaying === true && <Video video={currentVideo} setisplaying={setisplaying} data={data} setcurrentVideo={setcurrentVideo} user={user} /> }
 </div>
 );
 

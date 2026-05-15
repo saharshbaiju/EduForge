@@ -7,7 +7,7 @@
     padding: 20px;
     font-family: 'Urbanist', sans-serif;
     overflow-y: auto;
-    height: 100vh;
+    flex: 1;
     scrollbar-width: none;
 }
 

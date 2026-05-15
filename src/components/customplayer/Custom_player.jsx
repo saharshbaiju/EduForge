@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./custom_player.css";
 
-export default function Custom_player({ videoId }) {
+export default function Custom_player({ videoId, onWatchTimeUpdate }) {
   const playerRef = useRef(null);
   const containerRef = useRef(null);
 
   const [watchTime, setWatchTime] = useState(0);
   const startTimeRef = useRef(0);
+
+  useEffect(() => {
+    onWatchTimeUpdate?.(watchTime);
+  }, [watchTime, onWatchTimeUpdate]);
 
   useEffect(() => {
     const loadPlayer = () => {
@@ -55,9 +59,10 @@ export default function Custom_player({ videoId }) {
   };
 
   return (
-    <div className="">
-      <div ref={containerRef}></div>
-      <p>Watch Time: {watchTime.toFixed(2)} sec</p>
+    <div className="customPlayerContainer">
+      <div className="player-wrapper">
+        <div ref={containerRef}></div>
+      </div>
     </div>
   );
 }

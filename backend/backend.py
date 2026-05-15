@@ -100,5 +100,65 @@ def get_streak(username):
 
 
 
+@app.route("/notes/<username>/<video_id>", methods=["GET"])
+def get_notes(username, video_id):
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT content FROM notes WHERE username = %s AND video_id = %s",
+            (username, video_id)
+        )
+        note = cursor.fetchone()
+        return jsonify({"content": note["content"] if note else ""}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        db.close()
+
+@app.route("/notes", methods=["POST"])
+def save_notes():
+    db = get_db()
+    cursor = db.cursor()
+    data = request.json
+    username = data.get("username")
+    video_id = data.get("video_id")
+    content = data.get("content")
+
+    try:
+        query = """
+            INSERT INTO notes (username, video_id, content)
+            VALUES (%s, %s, %s)
+            ON DUPLICATE KEY UPDATE content = VALUES(content)
+        """
+        cursor.execute(query, (username, video_id, content))
+        db.commit()
+        return jsonify({"msg": "Note saved"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        db.close()
+
+
+
 if __name__ == "__main__":
+    # Create notes table if it doesn't exist
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS notes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL,
+            video_id VARCHAR(50) NOT NULL,
+            content TEXT,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY user_video (username, video_id)
+        )
+    """)
+    db.commit()
+    cursor.close()
+    db.close()
+    
     app.run(port=5000, debug=True)
