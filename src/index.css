@@ -235,3 +235,339 @@ body{
         letter-spacing: 1px;
     }
 }
+/* ================= LOGIN PAGE ================= */
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.dynamic-scroll-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.scroll-content {
+  display: flex;
+  flex-direction: column;
+  animation: scrollUp 20s linear infinite;
+}
+
+.scroll-content img {
+  margin-left: 10vw;
+  width: 420px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-45%);
+  }
+}
+
+.login-container {
+  overflow: hidden;
+  position: relative;
+  border-radius: 14px;
+  background-color: rgba(10, 7, 20, 0.102);
+
+  height: 500px;
+  width: 430px;
+
+  margin: auto;
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  transition: box-shadow 0.8s ease-in-out;
+}
+
+.login-container:hover {
+  box-shadow: 0 0 6px rgb(131, 130, 130);
+}
+
+.login-container h1 {
+  color: white;
+  font-family: Urbanist;
+  font-weight: 300;
+}
+
+.login-container a {
+  all: unset;
+  text-decoration: underline;
+  color: white;
+  font-family: Urbanist;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.login-container p {
+  color: white;
+  font-family: Urbanist;
+  font-weight: 300;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.login-container label {
+  color: white;
+  font-family: Urbanist;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.login-container input {
+  all: unset;
+
+  background-color: rgb(0, 0, 0);
+  color: white;
+
+  height: 50px;
+
+  border-radius: 35px;
+
+  padding-left: 20px;
+
+  font-family: Urbanist;
+  font-size: 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.376);
+}
+
+.login-container button {
+  margin-top: 40px;
+
+  height: 50px;
+
+  border-radius: 35px;
+
+  font-size: 17px;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+/* ================= SIGNUP PAGE ================= */
+
+.signup-wrapper {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.signup-container {
+  overflow: hidden;
+  position: relative;
+
+  border-radius: 14px;
+
+  background-color: rgba(10, 7, 20, 0.102);
+
+  height: 550px;
+  width: 430px;
+
+  margin: auto;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  transition: box-shadow 0.8s ease-in-out;
+}
+
+.signup-container:hover {
+  box-shadow: 0 0 6px rgb(131, 130, 130);
+}
+
+.signup-container h1 {
+  margin: 0;
+}
+
+.signup-container h1,
+.signup-container p,
+.signup-container a {
+  color: white;
+  font-family: Urbanist;
+  font-weight: 300;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.signup-container label {
+  color: white;
+  margin: 10px 0;
+  font-size: 18px;
+  font-family: Urbanist;
+}
+
+.signup-container input {
+  all: unset;
+
+  background: black;
+
+  color: white;
+
+  height: 50px;
+
+  font-family: Urbanist;
+
+  border-radius: 35px;
+
+  padding-left: 20px;
+
+  font-size: 17px;
+
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.signup-container button {
+  margin-top: 40px;
+
+  height: 50px;
+
+  border-radius: 35px;
+
+  font-family: Urbanist;
+
+  font-size: 17px;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.signup-container input.success {
+  border: solid 1.4px rgba(0, 235, 51, 0.69);
+}
+
+.signup-container input.error,
+.input-error {
+  border: solid 1.4px rgba(254, 17, 0, 0.683) !important;
+}
+
+.field-error {
+  color: rgba(254, 17, 0, 0.9);
+  font-size: 13px;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-family: Urbanist;
+}
+
+.error-container {
+  margin-top: 10px;
+}
+
+.error-text {
+  color: rgba(254, 17, 0, 0.9);
+  font-family: Urbanist;
+}
+
+/* ================= MOBILE ================= */
+
+@media only screen and (max-width: 750px) {
+
+  .login-wrapper,
+  .signup-wrapper {
+    flex-direction: column;
+  }
+
+  .dynamic-scroll-container {
+    height: 40vh;
+    align-items: flex-start;
+  }
+
+  .scroll-content {
+    flex-direction: row;
+    gap: 310px;
+    animation: scrollSide 20s linear infinite;
+  }
+
+  .scroll-content img {
+    width: 300px;
+
+    transform: rotate(90deg);
+
+    margin: 0;
+
+    position: relative;
+
+    transform-origin: top left;
+  }
+
+  @keyframes scrollSide {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .login-container,
+  .signup-container {
+    width: 400px;
+
+    height: auto;
+
+    margin: 20px auto;
+
+    position: absolute;
+
+    top: 60%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+}
