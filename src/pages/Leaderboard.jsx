@@ -5,6 +5,7 @@ import { FiAward, FiArrowLeft, FiUser, FiZap } from "react-icons/fi";
 import Background from "../components/background/Background";
 import forgeLogo from "../assets/forge.png";
 import "./leaderboard.css";
+import { API_BASE_URL } from "../config";
 
 const LeaderboardRow = ({ user, rank, onClick }) => (
     <div className="leaderboard-row" onClick={() => onClick(user.username)}>
@@ -51,7 +52,7 @@ export default function Leaderboard({ user }) {
     useEffect(() => {
         const fetchLeaderboard = async () => {
             try {
-                const response = await fetch("http://localhost:5000/leaderboard");
+                const response = await fetch(`${API_BASE_URL}/leaderboard`);
                 if (response.ok) {
                     const data = await response.json();
                     setLeaderboard(data);

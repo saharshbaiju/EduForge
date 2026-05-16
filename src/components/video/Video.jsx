@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./video.css";
 import Custom_player from "../customplayer/Custom_player";
+import { API_BASE_URL } from "../../config";
 
 import {
     MDXEditor,
@@ -72,7 +73,7 @@ export default function Video({
         watchTimeRef.current = totalMeasured;
 
         try {
-            await fetch("http://localhost:5000/profile/xp", {
+            await fetch(`${API_BASE_URL}/profile/xp`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -151,7 +152,7 @@ export default function Video({
 
             setNotes("");
 
-            fetch(`http://localhost:5000/notes/${user}/${video.id.videoId}`)
+            fetch(`${API_BASE_URL}/notes/${user}/${video.id.videoId}`)
                 .then((res) => res.json())
                 .then((data) => {
                     const fetchedContent = data.content || "";
@@ -173,7 +174,7 @@ export default function Video({
 
         try {
             const response = await fetch(
-                "http://localhost:5000/notes",
+                `${API_BASE_URL}/notes`,
                 {
                     method: "POST",
                     headers: {

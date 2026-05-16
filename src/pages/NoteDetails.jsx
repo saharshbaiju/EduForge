@@ -18,6 +18,7 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import Background from "../components/background/Background";
 import "./notes.css";
+import { API_BASE_URL } from "../config";
 
 export default function NoteDetails({ user }) {
     const { owner, videoId } = useParams();
@@ -45,7 +46,7 @@ export default function NoteDetails({ user }) {
 
         const fetchNote = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/notes/${encodeURIComponent(owner)}/${encodeURIComponent(videoId)}`);
+                const response = await fetch(`${API_BASE_URL}/notes/${encodeURIComponent(owner)}/${encodeURIComponent(videoId)}`);
                 if (response.ok) {
                     const data = await response.json();
                     setNote(data);
@@ -77,7 +78,7 @@ export default function NoteDetails({ user }) {
     const handleSave = async () => {
         setIsSaving(true);
         try {
-            const response = await fetch("http://localhost:5000/notes", {
+            const response = await fetch(`${API_BASE_URL}/notes`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

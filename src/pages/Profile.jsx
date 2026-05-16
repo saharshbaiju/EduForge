@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Background from "../components/background/Background";
 import Heatmap from "../components/Heatmap/Heatmap";
 import forgeLogo from "../assets/forge.png";
+import { API_BASE_URL } from "../config";
 
 import "./profile.css";
 
@@ -124,8 +125,8 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
 
       try {
         const [profileResponse, statsResponse] = await Promise.all([
-          fetch(`http://localhost:5000/profile/${encodeURIComponent(targetUser)}`),
-          fetch(`http://localhost:5000/profile/stats/${encodeURIComponent(targetUser)}`),
+          fetch(`${API_BASE_URL}/profile/${encodeURIComponent(targetUser)}`),
+          fetch(`${API_BASE_URL}/profile/stats/${encodeURIComponent(targetUser)}`),
         ]);
 
         const profilePayload = await profileResponse.json();
@@ -244,7 +245,7 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
     setMessage("");
 
     try {
-      const profileResponse = await fetch("http://localhost:5000/profile/update", {
+      const profileResponse = await fetch(`${API_BASE_URL}/profile/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -268,7 +269,7 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
 
       const effectiveUsername = profilePayload.username || form.display_name || user;
 
-      const socialsResponse = await fetch("http://localhost:5000/profile/socials", {
+      const socialsResponse = await fetch(`${API_BASE_URL}/profile/socials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

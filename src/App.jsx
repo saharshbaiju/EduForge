@@ -10,6 +10,7 @@ import NoteDetails from "./pages/NoteDetails";
 import Leaderboard from "./pages/Leaderboard";
 import { useState,useEffect } from "react";
 import forgeLogo from "./assets/forge.png";
+import { API_BASE_URL } from "./config";
 
 
 
@@ -25,7 +26,7 @@ function App() {
 useEffect(() => {
   localStorage.setItem("user", user);
   if (user) {
-    fetch(`http://localhost:5000/profile/${encodeURIComponent(user)}`)
+    fetch(`${API_BASE_URL}/profile/${encodeURIComponent(user)}`)
       .then(res => res.json())
       .then(data => {
         if (data.profile && data.profile.profile_image_url) {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import "./heatmap.css";
+import { API_BASE_URL } from "../../config";
 
 export default function Heatmap({ username }) {
   const [data, setData] = useState([]);
@@ -13,7 +14,7 @@ export default function Heatmap({ username }) {
 
     async function fetchData() {
       try {
-        const res = await fetch(`http://localhost:5000/streak/${username}`);
+        const res = await fetch(`${API_BASE_URL}/streak/${username}`);
         if (!res.ok) throw new Error("API error");
 
         const result = await res.json();

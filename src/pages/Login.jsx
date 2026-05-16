@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Background from "../components/background/Background";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 function Login({ setuser, user }) {
 
@@ -14,7 +15,7 @@ function Login({ setuser, user }) {
         setError("");
 
         try {
-            const res = await fetch("http://127.0.0.1:5000/login", {
+            const res = await fetch(`${API_BASE_URL}/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),

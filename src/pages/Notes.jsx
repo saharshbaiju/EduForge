@@ -13,6 +13,7 @@ import {
 import Background from "../components/background/Background";
 import forgeLogo from "../assets/forge.png";
 import "./notes.css";
+import { API_BASE_URL } from "../config";
 
 const NoteCard = ({ note, onClick }) => {
     const preview = note.content ? note.content.substring(0, 100) + (note.content.length > 100 ? "..." : "") : "No content";
@@ -66,7 +67,7 @@ export default function Notes({ user, profileImage }) {
 
         const fetchNotes = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/notes/${encodeURIComponent(user)}`);
+                const response = await fetch(`${API_BASE_URL}/notes/${encodeURIComponent(user)}`);
                 if (response.ok) {
                     const data = await response.json();
                     setNotes(data);
