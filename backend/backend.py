@@ -27,7 +27,7 @@ def get_db():
     )
 
 
-CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+CORS(app, origins=["http://localhost:5174", "http://127.0.0.1:5173"])
 
 LEVEL_THRESHOLD = 120
 
