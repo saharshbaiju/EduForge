@@ -99,7 +99,7 @@ export default function Top_panel({ data, setdata, setisplaying, initialQuery, u
 
     return(
         <div className={`top-panel ${isSearchOpen ? 'search-active' : ''}`}>
-            <div className="top-panel-logo" onClick={() => navigate("/home")} style={{cursor: 'pointer'}}>
+            <div className="top-panel-logo" onClick={() => navigate("/")} style={{cursor: 'pointer'}}>
                 <img src={forgeLogo} alt="EduForge" />
             </div>
 
