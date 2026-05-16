@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Background from "../components/background/Background";
 import Heatmap from "../components/Heatmap/Heatmap";
-import forgeLogo from "../assets/forge.png";
+const forgeLogo = "/forge.png";
 import { API_BASE_URL } from "../config";
 
 import "./profile.css";

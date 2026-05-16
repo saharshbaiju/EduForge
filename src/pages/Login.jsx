@@ -41,21 +41,21 @@ function Login({ setuser, user }) {
         <>
             <Background />
             
-            <img onClick={() => navigate("/")} className="logo" src="src/assets/forge.png" alt="logo" />
+            <img onClick={() => navigate("/")} className="logo" src="/forge.png" alt="logo" />
 
             <div className="login-wrapper">
                 <div className="dynamic-scroll-container">
                     <div className="scroll-content">
-                        <img src="src/assets/cover1.png" alt="scroll" />
-                        <img src="src/assets/cover2.png" alt="scroll" />
-                        <img src="src/assets/cover2.png" alt="scroll" />
-                        <img src="src/assets/cover1.png" alt="scroll" />
+                        <img src="/cover1.png" alt="scroll" />
+                        <img src="/cover2.png" alt="scroll" />
+                        <img src="/cover2.png" alt="scroll" />
+                        <img src="/cover1.png" alt="scroll" />
 
                         {/* infinite scroll */}
-                        <img src="src/assets/cover1.png" alt="scroll" />
-                        <img src="src/assets/cover2.png" alt="scroll" />
-                        <img src="src/assets/cover2.png" alt="scroll" />
-                        <img src="src/assets/cover1.png" alt="scroll" />
+                        <img src="/cover1.png" alt="scroll" />
+                        <img src="/cover2.png" alt="scroll" />
+                        <img src="/cover2.png" alt="scroll" />
+                        <img src="/cover1.png" alt="scroll" />
                     </div>
                 </div>
 

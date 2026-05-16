@@ -9,7 +9,7 @@ import Notes from "./pages/Notes";
 import NoteDetails from "./pages/NoteDetails";
 import Leaderboard from "./pages/Leaderboard";
 import { useState,useEffect } from "react";
-import forgeLogo from "./assets/forge.png";
+const forgeLogo = "/forge.png";
 import { API_BASE_URL } from "./config";
 
 

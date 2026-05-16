@@ -3,7 +3,7 @@ import Background from "../components/background/Background";
 import { Link, useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
 import { useNavigate } from "react-router-dom";
-import forgeLogo from "../assets/forge.png";
+const forgeLogo = "/forge.png";
 import searchIcon from "../assets/search.svg";
 import { FiFileText, FiAward } from "react-icons/fi";
 

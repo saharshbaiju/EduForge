@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiAward, FiArrowLeft, FiUser, FiZap } from "react-icons/fi";
 import Background from "../components/background/Background";
-import forgeLogo from "../assets/forge.png";
+const forgeLogo = "/forge.png";
 import "./leaderboard.css";
 import { API_BASE_URL } from "../config";
 

@@ -11,7 +11,7 @@ import {
     FiInbox
 } from "react-icons/fi";
 import Background from "../components/background/Background";
-import forgeLogo from "../assets/forge.png";
+const forgeLogo = "/forge.png";
 import "./notes.css";
 import { API_BASE_URL } from "../config";
 

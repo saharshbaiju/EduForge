@@ -53,21 +53,21 @@ function Signup(){
     return(
 
         <>
-                    <img onClick={() => navigate("/")} className="logo" src="src/assets/forge.png" alt="logo" />
+                    <img onClick={() => navigate("/")} className="logo" src="/forge.png" alt="logo" />
 
         <Background/>
         
         <div className="signup-wrapper">
             <div className="dynamic-scroll-container">
                 <div className="scroll-content">
-                    <img src="src/assets/cover1.png" alt="scroll image" />
-                    <img src="src/assets/cover2.png" alt="scroll image" />
+                    <img src="/cover1.png" alt="scroll image" />
+                    <img src="/cover2.png" alt="scroll image" />
 
 
                     {/* for infinite scroll */}
 
-                    <img src="src/assets/cover1.png" alt="scroll image" />
-                    <img src="src/assets/cover2.png" alt="scroll image" />
+                    <img src="/cover1.png" alt="scroll image" />
+                    <img src="/cover2.png" alt="scroll image" />
                 </div>
             </div>   
             <div className="signup-container">

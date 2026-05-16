@@ -1,7 +1,7 @@
 import "./Top_panel.css"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import forgeLogo from "../../assets/forge.png";
+const forgeLogo = "/forge.png";
 import searchIcon from "../../assets/search.svg";
 import { FiFileText, FiAward } from "react-icons/fi";
 
