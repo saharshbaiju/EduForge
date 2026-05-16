@@ -20,8 +20,10 @@ import Background from "../components/background/Background";
 import "./notes.css";
 
 export default function NoteDetails({ user }) {
-    const { videoId } = useParams();
+    const { owner, videoId } = useParams();
     const navigate = useNavigate();
+    
+    const isOwnNote = owner === user;
     
     const [note, setNote] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -43,7 +45,7 @@ export default function NoteDetails({ user }) {
 
         const fetchNote = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/notes/${encodeURIComponent(user)}/${encodeURIComponent(videoId)}`);
+                const response = await fetch(`http://localhost:5000/notes/${encodeURIComponent(owner)}/${encodeURIComponent(videoId)}`);
                 if (response.ok) {
                     const data = await response.json();
                     setNote(data);
@@ -58,7 +60,7 @@ export default function NoteDetails({ user }) {
         };
 
         fetchNote();
-    }, [user, videoId, navigate]);
+    }, [owner, videoId, navigate, user]);
 
     // Handle clicks outside export menu to close it
     useEffect(() => {
@@ -170,7 +172,7 @@ export default function NoteDetails({ user }) {
             
             <div className="note-details-toolbar">
                 <div className="toolbar-left">
-                    <button className="btn-icon" onClick={() => navigate("/notes")} title="Back">
+                    <button className="btn-icon" onClick={() => isOwnNote ? navigate("/notes") : navigate(-1)} title="Back">
                         <FiArrowLeft />
                     </button>
                     {saveStatus === 'success' && <span className="save-indicator success"><FiCheck /> Saved</span>}
@@ -193,7 +195,7 @@ export default function NoteDetails({ user }) {
                         )}
                     </div>
                     
-                    {!isEditing ? (
+                    {isOwnNote && (!isEditing ? (
                         <button className="btn-primary" onClick={() => setIsEditing(true)}>
                             <FiEdit2 /> Edit Note
                         </button>
@@ -206,7 +208,7 @@ export default function NoteDetails({ user }) {
                                 <FiSave /> {isSaving ? "Saving..." : "Save Changes"}
                             </button>
                         </>
-                    )}
+                    ))}
                 </div>
             </div>
 

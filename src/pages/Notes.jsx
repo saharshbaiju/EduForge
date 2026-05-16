@@ -138,7 +138,7 @@ export default function Notes({ user, profileImage }) {
                             <NoteCard 
                                 key={note.id} 
                                 note={note} 
-                                onClick={(id) => navigate(`/notes/${id}`)}
+                                onClick={(id) => navigate(`/notes/${user}/${id}`)}
                             />
                         ))}
                     </div>

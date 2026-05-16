@@ -420,7 +420,7 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
               </div>
             </section>
 
-            {isEditing && (
+            {isOwnProfile && isEditing && (
               <section className="profile-card profile-edit-card">
                 <div className="profile-section-heading">
                   <h2>Edit details</h2>
@@ -588,31 +588,33 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
                 <h2>Activity heatmap</h2>
                 <p>Login consistency for the current year.</p>
               </div>
-              <Heatmap username={profile.username || user} />
+              <Heatmap username={profile.username || targetUser} />
             </section>
 
-            <section className="profile-card profile-list-card">
-              <div className="profile-section-heading">
-                <h2>Recently watched</h2>
-                <p>Videos logged from real watch sessions.</p>
-              </div>
-              <div className="profile-activity-list">
-                {recentVideos.map((item) => (
-                  <article 
-                    key={item.id} 
-                    className={item.reference_id ? "clickable-item" : ""}
-                    onClick={() => handleActivityClick(item.reference_id)}
-                    style={item.reference_id ? { cursor: 'pointer' } : {}}
-                  >
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.subtitle}</p>
-                    </div>
-                    <span>{item.status}</span>
-                  </article>
-                ))}
-              </div>
-            </section>
+            {isOwnProfile && (
+              <section className="profile-card profile-list-card">
+                <div className="profile-section-heading">
+                  <h2>Recently watched</h2>
+                  <p>Videos logged from real watch sessions.</p>
+                </div>
+                <div className="profile-activity-list">
+                  {recentVideos.map((item) => (
+                    <article 
+                      key={item.id} 
+                      className={item.reference_id ? "clickable-item" : ""}
+                      onClick={() => handleActivityClick(item.reference_id)}
+                      style={item.reference_id ? { cursor: 'pointer' } : {}}
+                    >
+                      <div>
+                        <h3>{item.title}</h3>
+                        <p>{item.subtitle}</p>
+                      </div>
+                      <span>{item.status}</span>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <section className="profile-card profile-list-card">
               <div className="profile-section-heading">
@@ -621,13 +623,15 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
                     <h2>Recent notes</h2>
                     <p>Latest saved notes from your learning sessions.</p>
                   </div>
-                  <button 
-                    className="profile-secondary-button" 
-                    onClick={() => navigate("/notes")}
-                    style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
-                  >
-                    View All
-                  </button>
+                  {isOwnProfile && (
+                    <button 
+                      className="profile-secondary-button" 
+                      onClick={() => navigate("/notes")}
+                      style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
+                    >
+                      View All
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="profile-activity-list">
@@ -635,7 +639,7 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
                   <article 
                     key={item.id}
                     className={item.reference_id ? "clickable-item" : ""}
-                    onClick={() => item.reference_id && navigate(`/notes/${item.reference_id}`)}
+                    onClick={() => item.reference_id && navigate(`/notes/${targetUser}/${item.reference_id}`)}
                     style={item.reference_id ? { cursor: 'pointer' } : {}}
                   >
                     <div>

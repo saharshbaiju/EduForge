@@ -53,7 +53,7 @@ useEffect(() => {
       <Route path="/profile" element={<Profile user={user} setuser={setuser} setGlobalProfileImage={setProfileImage}/>}/>
       <Route path="/profile/:username" element={<Profile user={user} setuser={setuser} setGlobalProfileImage={setProfileImage}/>}/>
       <Route path="/notes" element={<Notes user={user} profileImage={profileImage}/>}/>
-      <Route path="/notes/:videoId" element={<NoteDetails user={user} profileImage={profileImage}/>}/>
+      <Route path="/notes/:owner/:videoId" element={<NoteDetails user={user} profileImage={profileImage}/>}/>
       <Route path="/leaderboard" element={<Leaderboard user={user} profileImage={profileImage}/>}/>
     </Routes>
     </>
