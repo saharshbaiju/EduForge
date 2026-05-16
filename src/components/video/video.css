@@ -259,13 +259,31 @@
     background: #0099cc;
 }
 
-.mdx-editor-wrapper {
+.notes-editor-wrapper {
     background: rgba(10, 15, 20, 0.9);
     border-radius: 8px;
     border: 1px solid rgba(0, 210, 255, 0.2);
     flex-grow: 1;
     min-height: 350px;
-    overflow: hidden !important;
+    display: flex;
+}
+
+.notes-textarea {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #e0f7fa;
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+}
+
+.notes-textarea::placeholder {
+    color: rgba(0, 210, 255, 0.3);
 }
 
 /* Description Container */

@@ -3,19 +3,6 @@ import "./video.css";
 import Custom_player from "../customplayer/Custom_player";
 import { API_BASE_URL } from "../../config";
 
-import {
-    MDXEditor,
-    headingsPlugin,
-    listsPlugin,
-    quotePlugin,
-    thematicBreakPlugin,
-    markdownShortcutPlugin,
-    toolbarPlugin,
-    UndoRedo
-} from "@mdxeditor/editor";
-
-import "@mdxeditor/editor/style.css";
-
 function formatTime(totalSeconds) {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
@@ -40,7 +27,6 @@ export default function Video({
     const [showFullDescription, setShowFullDescription] = useState(false);
     const [fullDescription, setFullDescription] = useState("");
 
-    const editorRef = useRef(null);
     const playerRef = useRef(null);
     const watchTimeRef = useRef(0);
     const syncedWatchTimeRef = useRef(0);
@@ -145,23 +131,13 @@ export default function Video({
     // Fetch notes
     useEffect(() => {
         if (user && video.id.videoId) {
-            // Clear editor first
-            if (editorRef.current) {
-                editorRef.current.setMarkdown("");
-            }
-
             setNotes("");
 
             fetch(`${API_BASE_URL}/notes/${user}/${video.id.videoId}`)
                 .then((res) => res.json())
                 .then((data) => {
                     const fetchedContent = data.content || "";
-
                     setNotes(fetchedContent);
-
-                    if (editorRef.current) {
-                        editorRef.current.setMarkdown(fetchedContent);
-                    }
                 })
                 .catch((err) =>
                     console.error("Error fetching notes:", err)
@@ -312,26 +288,12 @@ export default function Video({
                             </button>
                         </div>
 
-                        <div className="mdx-editor-wrapper">
-                            <MDXEditor
-                                ref={editorRef}
-                                markdown={notes}
-                                onChange={setNotes}
-                                className="dark-theme aqua-editor"
-                                plugins={[
-                                    headingsPlugin(),
-                                    listsPlugin(),
-                                    quotePlugin(),
-                                    thematicBreakPlugin(),
-                                    markdownShortcutPlugin(),
-                                    toolbarPlugin({
-                                        toolbarContents: () => (
-                                            <>
-                                                <UndoRedo />
-                                            </>
-                                        )
-                                    })
-                                ]}
+                        <div className="notes-editor-wrapper">
+                            <textarea
+                                className="notes-textarea"
+                                value={notes}
+                                onChange={(e) => setNotes(e.target.value)}
+                                placeholder="Type your notes here (Markdown supported)..."
                             />
                         </div>
                     </div>
