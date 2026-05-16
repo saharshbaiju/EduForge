@@ -10,12 +10,17 @@ from flask_cors import CORS
 import mysql.connector
 from werkzeug.security import check_password_hash, generate_password_hash
 
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 app = Flask(__name__)
 
 load_dotenv()
 
 TABLES_READY = False
-
 
 def get_db():
     return mysql.connector.connect(
@@ -26,8 +31,36 @@ def get_db():
         autocommit=os.getenv("DB_AUTOCOMMIT") == "True",
     )
 
+# CORS Configuration
+FRONTEND_ORIGINS = [
+    os.getenv("FRONTEND_URL", "http://localhost:5173"),
+    "https://jolly-river-0583b0500.7.azurestaticapps.net",
+    "http://localhost:5174",
+    "http://127.0.0.1:5173"
+]
 
-CORS(app, origins=[os.getenv("FRONTEND_URL", "http://localhost:5173"), "http://localhost:5174", "http://127.0.0.1:5173"])
+CORS(
+    app,
+    origins=FRONTEND_ORIGINS,
+    supports_credentials=True,
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"]
+)
+
+@app.before_request
+def log_request_info():
+    logger.info("Headers: %s", request.headers)
+    logger.info("Origin: %s", request.headers.get('Origin'))
+    logger.info("Method: %s", request.method)
+
+@app.after_request
+def add_cors_headers(response):
+    # Ensure CORS headers are present even if flask-cors missed them for some reason
+    origin = request.headers.get('Origin')
+    if origin in FRONTEND_ORIGINS:
+        response.headers['Access-Control-Allow-Origin'] = origin
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
 
 LEVEL_THRESHOLD = 120
 
@@ -738,7 +771,7 @@ def signup():
         db.close()
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["POST", "OPTIONS"])
 def login():
     db = get_db()
     cursor = db.cursor(dictionary=True)
@@ -984,7 +1017,7 @@ def get_profile_stats(username):
         return jsonify({"error": str(exc)}), 500
 
 
-@app.route("/profile/xp", methods=["POST"])
+@app.route("/profile/xp", methods=["POST", "OPTIONS"])
 def update_profile_xp():
     data = request.json or {}
     username = (data.get("username") or "").strip()
