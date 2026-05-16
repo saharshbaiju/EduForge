@@ -1,0 +1,56 @@
+.trending-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+    position: relative;
+}
+
+.trending-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    font-family: "Trispace", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.trending-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 900px;
+}
+
+.tag-chip {
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-family: "Trispace", sans-serif;
+    font-size: 13px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(4px);
+}
+
+.tag-chip:hover {
+    background: rgba(0, 210, 255, 0.1);
+    border-color: rgba(0, 210, 255, 0.4);
+    color: #00d2ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.15);
+}
+
+@media (max-width: 640px) {
+    .trending-tags {
+        gap: 8px;
+    }
+    .tag-chip {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+}
