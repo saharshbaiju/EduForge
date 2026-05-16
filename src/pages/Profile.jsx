@@ -197,11 +197,6 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
     [socials]
   );
 
-  const primaryMetrics = useMemo(() => {
-    const wanted = new Set(["Learning Score", "Watch Consistency", "Note Taking", "Course Completion"]);
-    return (stats.metrics || []).filter((metric) => wanted.has(metric.title));
-  }, [stats.metrics]);
-
   const recentVideos = stats.panels?.recently_watched || [];
   const recentNotes = stats.panels?.recent_notes || [];
   const levelThreshold = stats.xp?.level_threshold || 0;
@@ -547,20 +542,6 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
                 <div className="profile-progress-track">
                   <span style={{ width: `${xpPercent}%` }} />
                 </div>
-              </div>
-
-              <div className="profile-metric-list">
-                {primaryMetrics.map((metric) => (
-                  <div key={metric.title} className="profile-metric-line">
-                    <div>
-                      <span>{metric.title}</span>
-                      <strong>{metric.value}{metric.suffix}</strong>
-                    </div>
-                    <div className="profile-progress-track">
-                      <span style={{ width: `${Math.min(100, metric.value)}%` }} />
-                    </div>
-                  </div>
-                ))}
               </div>
             </section>
 

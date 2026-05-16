@@ -106,6 +106,28 @@
   border-color: #454a5c;
 }
 
+.profile-danger-button {
+  min-height: 42px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 82, 82, 0.2);
+  padding: 0 16px;
+  font-family: "Trispace", sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  background: rgba(255, 82, 82, 0.08);
+  color: #ff9999;
+  transition: all 180ms ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-danger-button:hover {
+  background: rgba(255, 82, 82, 0.15);
+  border-color: rgba(255, 82, 82, 0.4);
+  color: #ffffff;
+}
+
 .profile-alert {
   width: min(1180px, calc(100vw - 48px));
   margin: 0 auto 16px;
