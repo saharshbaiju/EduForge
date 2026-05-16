@@ -1,6 +1,8 @@
 import "./Top_panel.css"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import forgeLogo from "../../assets/forge.png";
+import searchIcon from "../../assets/search.svg";
 
 const allowedChannels =[
                     "freeCodeCamp.org","Programming with Mosh","Traversy Media","The Net Ninja","Fireship","Corey Schafer",
@@ -33,9 +35,10 @@ const allowedChannels =[
                     "IBM Research","Allen Institute for AI","Max Planck Society","Nature","Science Magazine","arXiv"
                     ];
 
-export default function Top_panel({ data, setdata, setisplaying, initialQuery }){
+export default function Top_panel({ data, setdata, setisplaying, initialQuery, user, profileImage }){
     const [input,setinput] = useState(initialQuery||"");
     const [query,setquery] = useState(initialQuery||"");
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -52,7 +55,9 @@ export default function Top_panel({ data, setdata, setisplaying, initialQuery })
     
     const handlesubmit = (e) => {
         e.preventDefault();
+        if (!input.trim()) return;
         setquery(input);
+        setIsSearchOpen(false);
         console.log(query)
     }
 
@@ -73,15 +78,6 @@ export default function Top_panel({ data, setdata, setisplaying, initialQuery })
                 const res = await fetch(`${url}?${params}`);
                 const data = await res.json();
                 console.log(data.items);
-
-                // const allowedChannels = [
-                // "freeCodeCamp.org",
-                // "Traversy Media",
-                // "CodeWithHarry"
-                // ];
-
-                
-
                 
                 const filtered = (data.items || []).filter(item =>
                     allowedChannels.some(ch =>
@@ -101,19 +97,47 @@ export default function Top_panel({ data, setdata, setisplaying, initialQuery })
     },[query])
 
     return(
-        <div className="top-panel">
-        <form onSubmit={handlesubmit}>
-      
-            <div className="wrapper-top">
-            <input type="search" 
-            value={input}
-            onChange={(e) => setinput(e.target.value)}
-            placeholder="Search skills ..."
-            className="home-search" />
-           <button type="submit" className="search-button"><img src="src/assets/search.svg" alt="search" /></button>
+        <div className={`top-panel ${isSearchOpen ? 'search-active' : ''}`}>
+            <div className="top-panel-logo" onClick={() => navigate("/home")} style={{cursor: 'pointer'}}>
+                <img src={forgeLogo} alt="EduForge" />
             </div>
-        </form>
-        <button className="profile" onClick={toProfile}></button>
+
+            <form onSubmit={handlesubmit} className="search-form">
+                <div className="wrapper-top">
+                    <input type="search" 
+                    value={input}
+                    onChange={(e) => setinput(e.target.value)}
+                    placeholder="Search skills ..."
+                    className="home-search" />
+                    <button type="submit" className="search-button">
+                        <img src={searchIcon} alt="search" />
+                    </button>
+                </div>
+            </form>
+
+            <div className="top-panel-actions">
+                <button 
+                    className="mobile-search-toggle" 
+                    onClick={() => setIsSearchOpen(true)}
+                    aria-label="Open search"
+                >
+                    <img src={searchIcon} alt="search" />
+                </button>
+
+                {isSearchOpen && (
+                    <button 
+                        className="mobile-search-close" 
+                        onClick={() => setIsSearchOpen(false)}
+                        aria-label="Close search"
+                    >
+                        &times;
+                    </button>
+                )}
+
+                <button className="profile" onClick={toProfile}>
+                    {profileImage && <img src={profileImage} alt="profile" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} />}
+                </button>
+            </div>
         </div>
     )
 }

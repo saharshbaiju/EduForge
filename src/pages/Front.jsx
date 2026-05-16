@@ -3,9 +3,11 @@ import Background from "../components/background/Background";
 import { Link, useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
 import { useNavigate } from "react-router-dom";
+import forgeLogo from "../assets/forge.png";
+import searchIcon from "../assets/search.svg";
 
 
-function Front({user,input, setinput}) {
+function Front({user,input, setinput, profileImage}) {
     console.log(user+"hello");
     const location = useLocation();
     const [showToast, setShowToast] = useState(false);
@@ -50,24 +52,26 @@ function Front({user,input, setinput}) {
             )}
 
             <div className="front-container">
-                <img src="src/assets/forge.png" alt="logo" className="logo" />
-                <h1 className="eduforge-heading">EduForge</h1>
-                <h5 className="caption">Where knowledge is forged, not scrolled.</h5>
+                <img src={forgeLogo} alt="logo" className="logo" />
+                <div className="front-content">
+                    <h1 className="eduforge-heading">EduForge</h1>
+                    <h5 className="caption">Where knowledge is forged, not scrolled.</h5>
 
-                <form onSubmit={handleSearch}>
-                    <div className="wrapper-front">
-                        <input
-                            type="search"
-                            value={input}
-                            onChange={(e) => setinput(e.target.value)}
-                            placeholder="Search skills ..."
-                            className="search"
-                        />
-                        <button type="submit" className="search-button">
-                            <img src="src/assets/search.svg" alt="search" className="search-button"/>
-                        </button>
-                    </div>
-                </form>
+                    <form onSubmit={handleSearch} className="front-form">
+                        <div className="wrapper-front">
+                            <input
+                                type="search"
+                                value={input}
+                                onChange={(e) => setinput(e.target.value)}
+                                placeholder="Search skills ..."
+                                className="front-search"
+                            />
+                            <button type="submit" className="front-search-button">
+                                <img src={searchIcon} alt="search" className="front-search-button"/>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
             {
                 !user && (
@@ -82,7 +86,7 @@ function Front({user,input, setinput}) {
                 user && (
                     <>
                     <Link to="/profile">
-                    <img className="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4hXH0vSYIzlKSEVCV67X88kiAcYjH7S9FXQ&s" alt="profile image" />
+                    <img className="profile-image" src={profileImage} alt="profile image" />
                     </Link>
                     </>
                 )

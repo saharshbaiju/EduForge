@@ -14,82 +14,86 @@ body{
     align-items: center;
     position: fixed;
     margin-bottom: 20vh;
-    
+    text-align: center;
 }
-/* .search-front{
-  position: absolute;
-  
-} */
+
 .logo{
     height: 70px;
     position: absolute;
-    left: 0;
+    left: 10px;
     top: 5px;
     z-index: 1000;
 }
+
+.front-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min-content;
+    max-width: 800px;
+}
+
+.eduforge-heading{
+    text-shadow: 0 0 px ;
+    margin:0px;
+    letter-spacing: 2px;
+    color: white;
+    font-family: "Tourney", sans-serif;
+    font-size: clamp(70px, 8vw, 100px);
+    font-weight: 500;
+    font-style: normal;
+    width: 100%;
+    white-space: nowrap;
+}
+
 .caption{
     color:white;
-    margin: 2px 0px;
+    margin: 10px 0px 20px;
     font-family: "Urbanist", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     letter-spacing: 2px;
-    font-size: clamp(14px,3vh,23px);
+    font-size: clamp(14px, 2.5vw, 22px);
     font-style: normal;
-}
-
-.search{
     width: 100%;
-    padding-left: 25px;
-    margin:10px 0px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.398);
-    font-family: "Trispace", sans-serif;
-    font-optical-sizing: auto;
-    font-size: 15px;
-    height: 50px;
-    border-radius:25px;
-    opacity: 100%;
-    transition:box-shadow 0.6s ease-in-out;
-    padding-right: 55px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-
 }
 
-.search:focus{
-    outline: none;
-    box-shadow: 0 0 15px rgba(0, 137, 249, 0.69);
-}
-.search::-webkit-search-cancel-button {
-    display: none;
-}
-.eduforge-heading{
-    text-shadow: 0 0 px ;
-    margin:0px;
-    /* padding:0px; */
-    letter-spacing: 2px;
-    color: white;
-    font-family: "Tourney", sans-serif;
-    font-size: clamp(70px,9vw,100px);
-    font-weight: 500;
-    font-style: normal;
-
+.front-form {
+    width: 100%;
 }
 
 .wrapper-front{
-    width:500px;
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
-    transition: width 0.2s linear;
-}
-.wrapper-front:hover{
-    width:550px;
 }
 
+.front-search {
+    box-sizing: border-box;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.396);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 25px;
+    width: 100%;
+    height: 50px;
+    margin:0;
+    padding: 0 55px 0 25px;
+    font-family: "Trispace", sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
 
+.front-search:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 137, 249, 0.69);
+}
 
-.search-button{
+.front-search::-webkit-search-cancel-button {
+    display: none;
+}
+
+.front-search-button{
     position: absolute;
     right: 5px;
     top: 50%;
@@ -98,7 +102,15 @@ body{
     aspect-ratio: 1;
     background: none;
     border: none;
-    
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.front-search-button img {
+    height: 20px;
+    width: 20px;
 }
 
 .login-signup{
@@ -151,513 +163,32 @@ body{
   position: absolute;
   top:10px;
   right: 20px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
 }
 
 @media only screen and (max-width:600px) {
-    .wrapper-front{
-    width:330px;
-    position: relative;
-    transition: width 0.2s linear;
+    .profile-image {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
     }
-    
+    .front-content {
+        width: min-content;
+        max-width: 90%;
+    }
     .eduforge-heading{
-        font-size: 8vh;
+        font-size: clamp(40px, 12vw, 70px);
     }
 
     .caption{
-        font-size: 1.6vh;
-    }
-    .wrapper-front:hover{
-        width:380px;
-    }
-    
-}
-
-.toast-notification {
-  position: fixed;
-
-    top: 20px;
-    right: 20px;
-    background-color: #0056b3; 
-    border: 2px solid #007bff; 
-    border-radius: 12px;
-    padding: 15px 25px;
-    color: white;
-    z-index: 1000;
-    min-width: 300px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.5s ease-out;
-}
-
-.toast-header {
-    font-family: "Trispace", sans-serif;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
-    opacity: 0.8;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.toast-body {
-    margin: 0;
-    font-family: "Trispace", sans-serif;
-    font-size: 1.1rem;
-}
-
-.info-icon {
-    background: white;
-    color: #0056b3;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@media only screen and (max-width: 750px) {
-    .toast-notification {
-    
-        top: auto;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        
-        width: auto;
-        max-width: 85%; 
-        min-width: 200px;
-        padding: 10px 16px; 
-        
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        
-        animation: slideUpMobile 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    }
-
-    .toast-header {
-        font-size: 0.75rem; 
-        gap: 8px;
-        margin-bottom: 2px;
-    }
-
-    .toast-body {
-        font-size: 0.9rem; 
-        line-height: 1.2;
-    }
-
-    .info-icon {
-        width: 14px;
-        height: 14px;
-        font-size: 10px;
+        font-size: 1.4vh;
+        letter-spacing: 1px;
     }
 }
-
-
-@keyframes slideUpMobile {
-    from { 
-        transform: translate(-50%, 50px); 
-        opacity: 0; 
-    }
-    to { 
-        transform: translate(-50%, 0); 
-        opacity: 1; 
-    }
-}
-
-/* ||||||||||||||||||||||||||||front-page end |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
-
-/* ||||||||||||||||||||||||||| login-page|||||||||||||||||||||||||||| */
-
-html, body {
-  margin: 0;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-}
-
-.login-wrapper {
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-
-    -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-}
-
-
-.dynamic-scroll-container {
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative; /* required for pseudo-elements */
-}
-
-
-.scroll-content {
-  display: flex;
-  flex-direction: column;
-  animation: scrollUp 20s linear infinite;
-}
-
-.scroll-content img {
-  margin-left: 10vw;
-  width: 420px;
-  display: block;
-  margin-bottom: 10px;
-}
-
-@keyframes scrollUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-45%);
-  }
-}
-.login-container {
-    overflow: hidden;
-    position: relative;
-    border-radius:14px;
-    background-color: rgba(10, 7, 20, 0.102);
-    height:500px;
-    transition: box-shadow 0.8s ease-in-out;
-    width: 430px;
-    margin: auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.login-container h1{
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.login-container a{
-    all: unset;
-    text-decoration: underline;
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.login-container p{
-    color: white;
-    font-family: Urbanist;
-    font-weight: 300;
-}
-.login-container:hover{
-    box-shadow: 0 0 6px rgb(131, 130, 130);
-
-}
-
-.login-form{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10%;
-}
-
-
-.login-container label{
-    color:white;
-    font-family:urbanist;
-    margin:10px 0px 10px 0px;
-    font-size: 18px;
-}
-.login-container input{
-    all:unset;
-    background-color: rgb(0, 0, 0);
-    color:white;
-    padding-left:2px;
-    font-family: urbanist;
-    height: 50px;
-    border-radius: 35px;
-    padding-left: 20px;
-    vertical-align: center;
-    font-size: 17px;
-    border:1px solid rgba(255, 255, 255, 0.376) ;
-}
-
-.login-container button{
-    /* margin: 5px; */
-    margin-top: 40px;
-    height: 50plo   x;
-    font-size: 17px;
-    border-radius:35px;
-    height: 50px;
-
-    
-}
-@media only screen and (max-width: 750px) {
-
-  .login-wrapper {
-    flex-direction: column;
-  }
-
-  .dynamic-scroll-container {
-    height: 40vh; 
-    align-items: flex-start;
-  }
-
-  .scroll-content {
-    flex-direction: row;
-    gap:310px;
-    animation: scrollSide 20s linear infinite;
-  }
-
-  .scroll-content img {
-    width: 300px;
-    transform: rotate(90deg);
-    margin: 0;
-    position: relative;
-    transform-origin: top left;
-  }
-
-  @keyframes scrollSide {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .login-container {
-    width: 400px;
-    height: auto;
-    margin: 20px auto;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-  }
-}
-.field-error {
-    color: #ff4d4d;         
-    font-size: 0.85rem;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    text-align: center;      
-    display: block;          
-    font-family: "Urbanist", sans-serif;
-    font-weight: 500;
-}
-
-.error-container {
-    background-color: rgba(255, 77, 77, 0.1); 
-    border: 1px solid #ff4d4d;               
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;                 
-    align-items: center;                     
-}
-
-.error-text {
-    color: #ff4d4d;                         
-    margin: 0;
-    text-align: center;                      
-    font-family: "Urbanist", sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.input-error {
-    border: 1.5px solid #ff4d4d !important;
-}
-
-/* |||||||||||||||||||||||||||||||||||||||login-page||||||||||||||||||||||||||||||| */
-
-/* ||||||||||||||||||||||||||||||||||||signup-page|||||||||||||||||||||||||||||||\ */
-
-body {
-  margin: 0;
-  overflow: hidden;
-
-}
-
-.signup-wrapper{
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-}
-
-.signup-container {
-  overflow: hidden;
-  position: relative;
-  border-radius:14px;
-  background-color: rgba(10, 7, 20, 0.102);
-  height:550px;
-  width: 430px;
-  margin: auto;
-  padding: 20px;
-  box-sizing: border-box;
-  transition: box-shadow 0.8s ease-in-out;
-}
-
-.signup-container:hover{
-  box-shadow: 0 0 6px rgb(131, 130, 130);
-}
-.signup-container h1{
-  margin: 0;
-}
-
-.signup-container h1,
-.signup-container p,
-.signup-container a {
-  color: white;
-  font-family: Urbanist;
-  font-weight: 300;
-}
-
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10%;
-}
-
-.signup-container label {
-  color:white;
-  margin:10px 0;
-  font-size: 18px;
-  font-family: Urbanist;
-}
-
-.signup-container input {
-  all:unset;
-  background:black;
-  color:white;
-  height:50px;
-  font-family: urbanist;
-  border-radius:35px;
-  padding-left:20px;
-  font-size:17px;
-  transition:border-color 0.6s ease-in-out;
-  border:1px solid rgba(255,255,255,0.3);
-}
-
-.signup-container input.success {
-  border:solid 1.4px rgba(0, 235, 51, 0.69);
-}
-.signup-container input.error {
-  border:solid 1.4px rgba(254, 17, 0, 0.683);
-}
-
-.signup-container button {
-  margin-top:40px;
-  height:50px;
-  border-radius:35px;
-  font-family: Urbanist;
-  font-size: 17px;
-}
-@media only screen and (max-width: 750px) {
-  .body{
-    overflow-y: scroll;
-  }
-  .signup-container {
-    width: 400px;
-    height: 510px;
-    margin: 20px auto;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-  }
-}
-
-/* ///////////////////////////////// home page ////////////////////////////////////////// */
-.home-container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-}
-.profileContainer{
-  height: 25vh;
-  width: 90vw;
-  background-color: #0c0d11;
-  border: solid white 1px;
-  margin: 10vh 0 0 5vw;
-}
-
-
-
-/* /////////////////////////////////// profile ///////////////////////// */
-.profileContainer{
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    box-shadow:
-        inset 0 0 20px rgba(255,255,255,0.05),
-        0 0 20px rgba(0,0,0,0.5);
-
-    border-radius: 20px;
-    color:#c9d1d9;
-
-}
-#icon_profile{
-
-  margin:2vw;
-  filter: unset;
-  width:clamp(80px, 10vw, 150px);
-  height: clamp(80px, 10vw, 150px);
-  background-color: rgba(0, 190, 150);
-  border-radius: 100px;
-  border:10px solid  rgba(0, 190, 150);
-  transition:ease-in-out 0.6s box-shadow;
-  float: right;
-  
-}
-
-#icon_profile:hover{
-  box-shadow:0px 0px 20px rgba(0, 190, 150);
-}
-
-
-

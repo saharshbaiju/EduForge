@@ -15,6 +15,16 @@ import {
 
 import "@mdxeditor/editor/style.css";
 
+function formatTime(totalSeconds) {
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = Math.floor(totalSeconds % 60);
+
+    if (h > 0) return `${h}h ${m}m ${s}s`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
+}
+
 export default function Video({
     video,
     setisplaying,
@@ -30,14 +40,64 @@ export default function Video({
     const [fullDescription, setFullDescription] = useState("");
 
     const editorRef = useRef(null);
+    const playerRef = useRef(null);
+    const watchTimeRef = useRef(0);
+    const syncedWatchTimeRef = useRef(0);
 
     if (!video) return null;
 
     const videoId = video.id.videoId;
 
+    useEffect(() => {
+        watchTimeRef.current = watchTime;
+    }, [watchTime]);
+
+    const syncWatchSession = async () => {
+        if (!user) return;
+
+        // Force a flush from the player child
+        const flushed = playerRef.current?.flushWatchTime?.() || 0;
+        
+        // Calculate what's not yet synced to backend using refs
+        const totalMeasured = watchTimeRef.current + flushed;
+        const toSync = Math.floor(totalMeasured - syncedWatchTimeRef.current);
+
+        if (toSync <= 0) return;
+
+        // Mark as synced immediately to prevent race conditions
+        const previousSynced = syncedWatchTimeRef.current;
+        syncedWatchTimeRef.current = totalMeasured;
+        
+        // Also update watchTimeRef so it stays consistent if component stays mounted
+        watchTimeRef.current = totalMeasured;
+
+        try {
+            await fetch("http://localhost:5000/profile/xp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: user,
+                    watch_time_seconds: toSync,
+                    video_id: video.id.videoId,
+                    title: video.snippet.title,
+                    channel_title: video.snippet.channelTitle
+                }),
+                keepalive: true
+            });
+        } catch (err) {
+            console.error("Error syncing XP:", err);
+            // Rollback on failure if we want to retry next time
+            syncedWatchTimeRef.current = previousSynced;
+        }
+    };
+
     // Fetch full video description
     useEffect(() => {
         if (videoId) {
+            watchTimeRef.current = 0;
+            syncedWatchTimeRef.current = 0;
             const fetchVideoDetails = async () => {
                 const url = "https://www.googleapis.com/youtube/v3/videos";
                 const params = new URLSearchParams({
@@ -62,6 +122,19 @@ export default function Video({
             fetchVideoDetails();
         }
     }, [videoId, video.snippet.description]);
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            syncWatchSession();
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+            syncWatchSession();
+        };
+    }, [videoId, user]);
 
     // Filter current video out of related videos
     const relatedVideos = data.filter(
@@ -129,7 +202,10 @@ export default function Video({
             <div className="video-header-nav">
                 <button
                     className="back-button"
-                    onClick={() => setisplaying(false)}
+                    onClick={async () => {
+                        await syncWatchSession();
+                        setisplaying(false);
+                    }}
                 >
                     &larr; Back to results
                 </button>
@@ -144,7 +220,7 @@ export default function Video({
                     
                     <div className="watch-time-display">
                         <span className="watch-time-icon">⏱</span>
-                        <span>Watch Time: {watchTime.toFixed(2)} sec</span>
+                        <span>Watch Time: {formatTime(watchTime)}</span>
                     </div>
                 </div>
             </div>
@@ -158,6 +234,7 @@ export default function Video({
                                 key={item.id.videoId}
                                 className="related-video-card"
                                 onClick={() => {
+                                    syncWatchSession();
                                     setcurrentVideo(item);
                                     setShowRelated(false);
                                     window.scrollTo(0, 0);
@@ -184,8 +261,15 @@ export default function Video({
                     {/* Video Player */}
                     <div className="video-player-section">
                         <Custom_player 
+                            ref={playerRef}
                             videoId={video.id.videoId} 
                             onWatchTimeUpdate={setWatchTime}
+                            onUnmount={(finalPlayed) => {
+                                // Add to refs so syncWatchSession picks it up
+                                watchTimeRef.current += finalPlayed;
+                                setWatchTime(prev => prev + finalPlayed);
+                                syncWatchSession();
+                            }}
                         />
                     </div>
 
