@@ -85,6 +85,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'users' ensured.")
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS streak (
@@ -95,6 +96,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'streak' ensured.")
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS notes (
@@ -108,6 +110,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'notes' ensured.")
         try:
             cursor.execute(
                 "ALTER TABLE notes ADD COLUMN title VARCHAR(255) DEFAULT 'Untitled Note'"
@@ -133,6 +136,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'user_profiles' ensured.")
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS social_links (
@@ -147,6 +151,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'social_links' ensured.")
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS user_stats (
@@ -169,6 +174,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'user_stats' ensured.")
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS learning_activity (
@@ -187,6 +193,7 @@ def ensure_tables():
             )
             """
         )
+        print("Table 'learning_activity' ensured.")
         try:
             cursor.execute(
                 "ALTER TABLE learning_activity ADD COLUMN reference_id VARCHAR(120)"
