@@ -182,7 +182,8 @@ export default function Video({
                     body: JSON.stringify({
                         username: user,
                         video_id: video.id.videoId,
-                        content: notes
+                        content: notes,
+                        title: video.snippet.title
                     })
                 }
             );

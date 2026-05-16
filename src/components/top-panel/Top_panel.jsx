@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import forgeLogo from "../../assets/forge.png";
 import searchIcon from "../../assets/search.svg";
+import { FiFileText, FiAward } from "react-icons/fi";
 
 const allowedChannels =[
                     "freeCodeCamp.org","Programming with Mosh","Traversy Media","The Net Ninja","Fireship","Corey Schafer",
@@ -133,6 +134,22 @@ export default function Top_panel({ data, setdata, setisplaying, initialQuery, u
                         &times;
                     </button>
                 )}
+
+                <button 
+                    className="top-panel-notes-btn" 
+                    onClick={() => navigate("/notes")}
+                    title="My Notes"
+                >
+                    <FiFileText size={20} />
+                </button>
+
+                <button 
+                    className="top-panel-leaderboard-btn" 
+                    onClick={() => navigate("/leaderboard")}
+                    title="Leaderboard"
+                >
+                    <FiAward size={20} />
+                </button>
 
                 <button className="profile" onClick={toProfile}>
                     {profileImage && <img src={profileImage} alt="profile" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} />}

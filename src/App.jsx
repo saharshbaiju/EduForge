@@ -5,6 +5,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import Notes from "./pages/Notes";
+import NoteDetails from "./pages/NoteDetails";
+import Leaderboard from "./pages/Leaderboard";
 import { useState,useEffect } from "react";
 import forgeLogo from "./assets/forge.png";
 
@@ -48,6 +51,10 @@ useEffect(() => {
       <Route path="/" element={<Front user={user} input={input} setinput={setinput} profileImage={profileImage}/>}/>
       <Route path="/home" element={<Home user={user} profileImage={profileImage}/>}/>
       <Route path="/profile" element={<Profile user={user} setuser={setuser} setGlobalProfileImage={setProfileImage}/>}/>
+      <Route path="/profile/:username" element={<Profile user={user} setuser={setuser} setGlobalProfileImage={setProfileImage}/>}/>
+      <Route path="/notes" element={<Notes user={user} profileImage={profileImage}/>}/>
+      <Route path="/notes/:videoId" element={<NoteDetails user={user} profileImage={profileImage}/>}/>
+      <Route path="/leaderboard" element={<Leaderboard user={user} profileImage={profileImage}/>}/>
     </Routes>
     </>
   )

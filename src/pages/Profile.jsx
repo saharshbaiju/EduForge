@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Background from "../components/background/Background";
 import Heatmap from "../components/Heatmap/Heatmap";
@@ -79,7 +79,12 @@ function ProfileSkeleton() {
 }
 
 export default function Profile({ user, setuser, setGlobalProfileImage }) {
+  const { username: urlUsername } = useParams();
   const navigate = useNavigate();
+  
+  const targetUser = urlUsername || user;
+  const isOwnProfile = !urlUsername || urlUsername === user;
+
   const [profile, setProfile] = useState(EMPTY_PROFILE);
   const [socials, setSocials] = useState(EMPTY_SOCIALS);
   const [stats, setStats] = useState(EMPTY_STATS);
@@ -102,13 +107,13 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (!user) {
+    if (!targetUser) {
       navigate("/login");
     }
-  }, [navigate, user]);
+  }, [navigate, targetUser]);
 
   useEffect(() => {
-    if (!user) return undefined;
+    if (!targetUser) return undefined;
 
     let cancelled = false;
 
@@ -119,8 +124,8 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
 
       try {
         const [profileResponse, statsResponse] = await Promise.all([
-          fetch(`http://localhost:5000/profile/${encodeURIComponent(user)}`),
-          fetch(`http://localhost:5000/profile/stats/${encodeURIComponent(user)}`),
+          fetch(`http://localhost:5000/profile/${encodeURIComponent(targetUser)}`),
+          fetch(`http://localhost:5000/profile/stats/${encodeURIComponent(targetUser)}`),
         ]);
 
         const profilePayload = await profileResponse.json();
@@ -142,22 +147,25 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
         setProfile(loadedProfile);
         setSocials(loadedSocials);
         setStats(statsPayload || EMPTY_STATS);
-        setForm({
-          display_name: loadedProfile.display_name || user,
-          bio: loadedProfile.bio || "",
-          role_title: loadedProfile.role_title || "",
-          profile_image_url: loadedProfile.profile_image_url || "",
-          location: loadedProfile.location || "",
-          timezone: loadedProfile.timezone || "",
-          website: loadedProfile.website || "",
-          skills: loadedProfile.skills || [],
-        });
-        setFormSocials(loadedSocials);
 
-        if (loadedProfile.profile_image_url) {
-          setGlobalProfileImage?.(loadedProfile.profile_image_url);
-        } else {
-          setGlobalProfileImage?.(forgeLogo);
+        if (isOwnProfile) {
+          setForm({
+            display_name: loadedProfile.display_name || user,
+            bio: loadedProfile.bio || "",
+            role_title: loadedProfile.role_title || "",
+            profile_image_url: loadedProfile.profile_image_url || "",
+            location: loadedProfile.location || "",
+            timezone: loadedProfile.timezone || "",
+            website: loadedProfile.website || "",
+            skills: loadedProfile.skills || [],
+          });
+          setFormSocials(loadedSocials);
+
+          if (loadedProfile.profile_image_url) {
+            setGlobalProfileImage?.(loadedProfile.profile_image_url);
+          } else {
+            setGlobalProfileImage?.(forgeLogo);
+          }
         }
       } catch (loadError) {
         if (!cancelled) {
@@ -175,7 +183,7 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [targetUser, user, isOwnProfile]);
 
   const socialEntries = useMemo(
     () =>
@@ -329,19 +337,23 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
 
         <header className="profile-topbar">
           <div>
-            <p>Profile</p>
-            <h1>{profile.display_name || user}</h1>
+            <p>{isOwnProfile ? "My Profile" : "Public Profile"}</p>
+            <h1>{profile.display_name || targetUser}</h1>
           </div>
           <div className="profile-topbar-actions">
             <button type="button" className="profile-secondary-button" onClick={() => navigate("/home")}>
               <span>←</span> Back
             </button>
-            <button type="button" className="profile-primary-button" onClick={() => setIsEditing((value) => !value)}>
-              <span>{isEditing ? "👁" : "✎"}</span> {isEditing ? "View profile" : "Edit profile"}
-            </button>
-            <button type="button" className="profile-danger-button" onClick={handleLogout}>
-              <span>⎋</span> Logout
-            </button>
+            {isOwnProfile && (
+              <button type="button" className="profile-primary-button" onClick={() => setIsEditing((value) => !value)}>
+                <span>{isEditing ? "👁" : "✎"}</span> {isEditing ? "View profile" : "Edit profile"}
+              </button>
+            )}
+            {isOwnProfile && (
+              <button type="button" className="profile-danger-button" onClick={handleLogout}>
+                <span>⎋</span> Logout
+              </button>
+            )}
           </div>
         </header>
 
@@ -604,15 +616,26 @@ export default function Profile({ user, setuser, setGlobalProfileImage }) {
 
             <section className="profile-card profile-list-card">
               <div className="profile-section-heading">
-                <h2>Recent notes</h2>
-                <p>Latest saved notes from your learning sessions.</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                  <div>
+                    <h2>Recent notes</h2>
+                    <p>Latest saved notes from your learning sessions.</p>
+                  </div>
+                  <button 
+                    className="profile-secondary-button" 
+                    onClick={() => navigate("/notes")}
+                    style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
+                  >
+                    View All
+                  </button>
+                </div>
               </div>
               <div className="profile-activity-list">
                 {recentNotes.map((item) => (
                   <article 
                     key={item.id}
                     className={item.reference_id ? "clickable-item" : ""}
-                    onClick={() => handleActivityClick(item.reference_id)}
+                    onClick={() => item.reference_id && navigate(`/notes/${item.reference_id}`)}
                     style={item.reference_id ? { cursor: 'pointer' } : {}}
                   >
                     <div>

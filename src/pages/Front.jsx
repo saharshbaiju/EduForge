@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 import { useNavigate } from "react-router-dom";
 import forgeLogo from "../assets/forge.png";
 import searchIcon from "../assets/search.svg";
+import { FiFileText, FiAward } from "react-icons/fi";
 
 
 function Front({user,input, setinput, profileImage}) {
@@ -82,13 +83,21 @@ function Front({user,input, setinput, profileImage}) {
                 </>
                 )
             }
-            {
+                {
                 user && (
-                    <>
-                    <Link to="/profile">
-                    <img className="profile-image" src={profileImage} alt="profile image" />
-                    </Link>
-                    </>
+                    <div className="front-top-actions">
+                        <Link to="/leaderboard" className="front-notes-link leaderboard-link">
+                            <FiAward size={20} />
+                            <span>Leaderboard</span>
+                        </Link>
+                        <Link to="/notes" className="front-notes-link">
+                            <FiFileText size={20} />
+                            <span>Notes</span>
+                        </Link>
+                        <Link to="/profile">
+                            <img className="profile-image" src={profileImage} alt="profile image" />
+                        </Link>
+                    </div>
                 )
             }
             

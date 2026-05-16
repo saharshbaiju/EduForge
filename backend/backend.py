@@ -101,12 +101,19 @@ def ensure_tables():
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(255) NOT NULL,
                 video_id VARCHAR(50) NOT NULL,
+                title VARCHAR(255) DEFAULT 'Untitled Note',
                 content TEXT,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 UNIQUE KEY user_video (username, video_id)
             )
             """
         )
+        try:
+            cursor.execute(
+                "ALTER TABLE notes ADD COLUMN title VARCHAR(255) DEFAULT 'Untitled Note'"
+            )
+        except mysql.connector.Error:
+            pass
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS user_profiles (
@@ -553,7 +560,7 @@ def build_stats_payload(username):
 
         cursor.execute(
             """
-            SELECT video_id, content, updated_at
+            SELECT video_id, content, updated_at, title
             FROM notes
             WHERE username = %s
             ORDER BY updated_at DESC
@@ -620,7 +627,7 @@ def build_stats_payload(username):
             {
                 "id": f"note-{index}",
                 "reference_id": note["video_id"],
-                "title": f"Video Note {index}",
+                "title": note["title"] or f"Video Note {index}",
                 "subtitle": excerpt[:90] + ("..." if len(excerpt) > 90 else "") if excerpt else "Start capturing your learning takeaways.",
                 "progress": min(100, max(18, len(content) // 8 if content else 18)),
                 "status": "Synced",
@@ -764,17 +771,35 @@ def get_streak(username):
     return jsonify({"dates": streak_stats["dates"]})
 
 
+@app.route("/notes/<username>", methods=["GET"])
+def get_all_notes(username):
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT * FROM notes WHERE username = %s ORDER BY updated_at DESC",
+            (username,),
+        )
+        notes = cursor.fetchall()
+        return jsonify(notes), 200
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+    finally:
+        cursor.close()
+        db.close()
+
+
 @app.route("/notes/<username>/<video_id>", methods=["GET"])
 def get_notes(username, video_id):
     db = get_db()
     cursor = db.cursor(dictionary=True)
     try:
         cursor.execute(
-            "SELECT content FROM notes WHERE username = %s AND video_id = %s",
+            "SELECT * FROM notes WHERE username = %s AND video_id = %s",
             (username, video_id),
         )
         note = cursor.fetchone()
-        return jsonify({"content": note["content"] if note else ""}), 200
+        return jsonify(note if note else {"content": "", "title": ""}), 200
     except Exception as exc:
         return jsonify({"error": str(exc)}), 500
     finally:
@@ -790,14 +815,15 @@ def save_notes():
     username = data.get("username")
     video_id = data.get("video_id")
     content = data.get("content")
+    title = data.get("title", "Untitled Note")
 
     try:
         query = """
-            INSERT INTO notes (username, video_id, content)
-            VALUES (%s, %s, %s)
-            ON DUPLICATE KEY UPDATE content = VALUES(content)
+            INSERT INTO notes (username, video_id, content, title)
+            VALUES (%s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE content = VALUES(content), title = VALUES(title)
         """
-        cursor.execute(query, (username, video_id, content))
+        cursor.execute(query, (username, video_id, content, title))
         db.commit()
         return jsonify({"msg": "Note saved"}), 200
     except Exception as exc:
@@ -976,6 +1002,40 @@ def update_profile_xp():
         return jsonify(payload), 200
     except Exception as exc:
         return jsonify({"error": str(exc)}), 500
+
+
+@app.route("/leaderboard", methods=["GET"])
+def get_leaderboard():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    try:
+        cursor.execute(
+            """
+            SELECT 
+                up.username, 
+                up.display_name, 
+                up.profile_image_url, 
+                up.role_title,
+                us.xp_score,
+                us.status_badge
+            FROM user_profiles up
+            JOIN user_stats us ON up.username = us.username
+            ORDER BY us.xp_score DESC
+            LIMIT 50
+            """
+        )
+        leaderboard = cursor.fetchall()
+        
+        # Add level information
+        for entry in leaderboard:
+            entry["level"] = max(1, (entry["xp_score"] or 0) // LEVEL_THRESHOLD + 1)
+            
+        return jsonify(leaderboard), 200
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+    finally:
+        cursor.close()
+        db.close()
 
 
 if __name__ == "__main__":
